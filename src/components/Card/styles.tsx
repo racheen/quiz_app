@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-import Card from '.';
 
 type CardProps = {
   isProject?: boolean;
