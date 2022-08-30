@@ -4,6 +4,7 @@ import { ThemeProvider } from 'styled-components';
 import { useTheme } from './theme/useTheme';
 import Home from './pages/Home';
 import GlobalStyle from './theme/globalStyle';
+import Footer from './components/Footer';
 
 export default function App() {
   const { theme } = useTheme();
@@ -17,6 +18,7 @@ export default function App() {
             <Route path='/' element={<Home />} />
           </Routes>
         </Router>
+        <Footer />
       </ThemeProvider>
     </>
   );

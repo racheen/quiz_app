@@ -1,4 +1,5 @@
 import Card from '../../components/Card';
+import Button from '../../components/Button';
 import {
   H1,
   H2,
@@ -10,7 +11,12 @@ import {
   SectionText,
   SectionTitle,
 } from './styles';
-import { dataExperiences, dataProjects } from '../../assets/data';
+import {
+  dataExperiences,
+  dataProjects,
+  resumeLink,
+  linkedinLink,
+} from '../../assets/data';
 
 export default function HomePage() {
   const projects = dataProjects;
@@ -70,6 +76,16 @@ export default function HomePage() {
               website={project.website}
             />
           ))}
+        </SectionContent>
+      </Section>
+      <Section>
+        <SectionContent>
+          <Button type='primary' to={linkedinLink}>
+            <p>Get in touch</p>
+          </Button>
+          <Button type='primary' to={resumeLink}>
+            <p>View Resume</p>
+          </Button>
         </SectionContent>
       </Section>
     </>
