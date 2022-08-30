@@ -66,3 +66,8 @@ export const dataProjects: Project[] = [
       'Refactored Udagram, a cloud application developed alongside the Udacity Cloud Engineering Nanodegree. It allows users to register and log into a web client, post photos to the feed, and process photos, to different types of architectures - from monolith to microservices, to serverless',
   },
 ];
+
+export const resumeLink =
+  'https://docs.google.com/document/d/1-BoDh5MLDDqqb_qIKv3gd7IMSogKHstWb66jpdNHRgk/edit?usp=sharing';
+
+export const linkedinLink = 'https://www.linkedin.com/in/rachemoniq/';
