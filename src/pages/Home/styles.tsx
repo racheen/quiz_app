@@ -10,6 +10,7 @@ export const Section = styled.div<SectionProps>`
   color: ${(props) => props.theme.colors.darkGray};
   padding-top: 50px;
   padding-bottom: 50px;
+  min-height: 300px;
 
   ${(props) =>
     props.full &&
@@ -19,7 +20,6 @@ export const Section = styled.div<SectionProps>`
       justify-content: center;
       align-items: center;
     `}
-
   ${(props) =>
     props.both &&
     css`
@@ -30,15 +30,14 @@ export const Section = styled.div<SectionProps>`
       background-size: 10px 100%;
       background-repeat: no-repeat;
     `}
-
-  ${(props) =>
+    ${(props) =>
     props.rightOnly &&
     css`
       background: linear-gradient(${props.theme.colors.lightGreen} 0 0)
         calc(7.5 * 100% / 8);
       background-size: 10px 90%;
       background-repeat: no-repeat;
-    `}
+    `};
 `;
 
 export const SectionContentLayout = styled.div`
