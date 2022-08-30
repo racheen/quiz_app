@@ -54,12 +54,13 @@ export default function HomePage() {
       <Section>
         <SectionTitle>where I've worked...</SectionTitle>
         <SectionContent>
-          {experiences.slice(0, MAX_DISPLAY).map((experience) => (
+          {experiences.slice(0, MAX_DISPLAY).map((experience, key) => (
             <Card
               company={experience.company}
               subcontent={experience.year}
               website={experience.website}
               workTitle={experience.as}
+              key={key}
             />
           ))}
         </SectionContent>
@@ -67,13 +68,14 @@ export default function HomePage() {
       <Section>
         <SectionTitle>some notable projects...</SectionTitle>
         <SectionContent>
-          {projects.slice(0, MAX_DISPLAY).map((project) => (
+          {projects.slice(0, MAX_DISPLAY).map((project, key) => (
             <Card
               content={project.description}
               isProject={true}
               subcontent={project.technologies}
               title={project.name}
               website={project.website}
+              key={key}
             />
           ))}
         </SectionContent>
