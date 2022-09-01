@@ -38,4 +38,6 @@ export const StyledButton = styled(Button)`
   &.ant-btn-sm {
     padding: 8px 10px;
   }
+
+  margin: 10px;
 `;

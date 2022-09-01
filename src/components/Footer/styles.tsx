@@ -15,10 +15,14 @@ export const FooterText = styled.p`
   padding: 2px;
   margin: 0;
   color: ${(props) => props.theme.colors.mediumGray};
-  font-size: ${(props) => props.theme.fontSizes.normal};
+  font-size: ${(props) => props.theme.fontSizes.small};
   display: flex;
   flex-direction: row;
   align-items: center;
+
+  @media screen and ${(props) => props.theme.device.mobileL} {
+    font-size: ${(props) => props.theme.fontSizes.normal};
+  } ;
 `;
 
 export const GreenText = styled(FooterText)`
