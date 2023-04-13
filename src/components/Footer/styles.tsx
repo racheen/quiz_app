@@ -2,9 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
-  height: 30px;
   display: flex;
-  padding: 40px 0 30px 0;
   bottom: 0;
   flex-direction: column;
   justify-content: center;
@@ -14,21 +12,20 @@ export const Container = styled.div`
 export const FooterText = styled.p`
   padding: 2px;
   margin: 0;
-  color: ${(props) => props.theme.colors.mediumGray};
-  font-size: ${(props) => props.theme.fontSizes.small};
+  color: ${(props) => props.theme.colors.onPrimary};
+  ${(props) => props.theme.fonts.body.large};
   display: flex;
-  flex-direction: row;
   align-items: center;
 
   @media screen and ${(props) => props.theme.device.mobileL} {
-    font-size: ${(props) => props.theme.fontSizes.normal};
+    ${(props) => props.theme.fonts.body.medium};
   } ;
 `;
 
 export const GreenText = styled(FooterText)`
-  color: ${(props) => props.theme.colors.lightGreen};
+  color: ${(props) => props.theme.colors.primaryContainer};
 `;
 
 export const CopyrightText = styled(FooterText)`
-  font-size: ${(props) => props.theme.fontSizes.small};
+  ${(props) => props.theme.fonts.body.small};
 `;
