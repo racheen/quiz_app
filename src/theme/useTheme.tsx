@@ -1,20 +1,30 @@
 import { useEffect, useState } from "react";
 import { defaultTheme, darkTheme } from "./themes";
 
+type ThemeType = typeof defaultTheme;
+
+const THEME_STORAGE_KEY = "default";
+
 export const useTheme = () => {
-  const [theme, setTheme] = useState(darkTheme);
+  const [theme, setTheme] = useState<ThemeType>(darkTheme);
 
-  function changeTheme() {
-    const themeId = theme.id;
-    switch (themeId) {
-      case 1:
-        return setTheme(defaultTheme);
-      case 2:
-        return setTheme(darkTheme);
+  // Load theme from localStorage on first load
+  useEffect(() => {
+    const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
+    if (savedTheme === "default") {
+      setTheme(defaultTheme);
+    } else {
+      setTheme(darkTheme); // default fallback
     }
-  }
+  }, []);
 
-  useEffect(() => {}, [theme]);
+  const changeTheme = () => {
+    const isCurrentlyDark = theme.id === darkTheme.id;
+
+    const newTheme = isCurrentlyDark ? defaultTheme : darkTheme;
+    setTheme(newTheme);
+    localStorage.setItem(THEME_STORAGE_KEY, isCurrentlyDark ? "default" : "dark");
+  };
 
   return { theme, changeTheme };
 };

@@ -1,31 +1,38 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  width: 100%;
   display: flex;
-  bottom: 0;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  align-items: flex-start; /* Left-aligns the content */
+  padding: 20px;
+  min-height: 100vh; /* Ensures the container takes full height */
+  justify-content: flex-end; /* Pushes content to the bottom */
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+
+  @media (max-width: 768px) {
+    /* Ensure it is positioned at the bottom when in mobile view */
+    position: relative;
+    min-height: auto; /* Ensures it takes full screen height */
+    justify-content: flex-end; /* Push content to the bottom */
+  }
 `;
 
-export const FooterText = styled.p`
-  padding: 2px;
-  margin: 0;
-  color: ${(props) => props.theme.colors.onPrimary};
-  ${(props) => props.theme.fonts.body.large};
+export const GreenText = styled.span`
+  color: ${(props) => props.theme.colors.darkGreen};
+`;
+
+export const CopyrightText = styled.p`
+  font-size: 0.9rem;
+  margin-top: 10px;
+  text-align: center;
+`;
+
+export const SocialIcons = styled.div`
   display: flex;
-  align-items: center;
-
-  @media screen and ${(props) => props.theme.device.mobileL} {
-    ${(props) => props.theme.fonts.body.medium};
-  } ;
-`;
-
-export const GreenText = styled(FooterText)`
-  color: ${(props) => props.theme.colors.primaryContainer};
-`;
-
-export const CopyrightText = styled(FooterText)`
-  ${(props) => props.theme.fonts.body.small};
+  justify-content: center;
+  margin-top: 15px;
 `;

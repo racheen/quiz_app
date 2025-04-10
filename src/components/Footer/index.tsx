@@ -1,12 +1,11 @@
-import { Container, CopyrightText, FooterText, GreenText } from './styles';
+import { Container, CopyrightText, GreenText } from './styles';
 
 export const Footer = () => {
   return (
     <Container>
-      <FooterText>
-        developed and designed by <GreenText>Rachem</GreenText>
-      </FooterText>
-      <CopyrightText>Copyright © 2021</CopyrightText>
+      <CopyrightText>
+        Copyright © 2025 - <GreenText>Rachem</GreenText>
+      </CopyrightText>
     </Container>
   );
 };

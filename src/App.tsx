@@ -5,9 +5,11 @@ import { useTheme } from './theme/useTheme';
 import Home from './pages/Home';
 import GlobalStyle from './theme/globalStyle';
 import Footer from './components/Footer';
+import { ThemeToggle } from './components/ThemeToggle';
 
 export default function App() {
-  const { theme } = useTheme();
+  const { theme, changeTheme } = useTheme();
+  const isDark = theme.id === 2;
 
   return (
     <>
@@ -19,6 +21,7 @@ export default function App() {
           </Routes>
         </Router>
         <Footer />
+        <ThemeToggle isDark={isDark} onToggle={changeTheme} />
       </ThemeProvider>
     </>
   );
