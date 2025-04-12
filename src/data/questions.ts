@@ -1,9 +1,23 @@
 import { Question } from '../types/question';
 
+export enum TopicEnum {
+  DataPreprocessing = 'Data Preprocessing',
+  SupportVectorMachines = 'Support Vector Machines',
+  NeuralNetworks = 'Neural Networks',
+  TimeSeriesRNN = 'Time Series RNN',
+  NaiveBayes = 'Naive Bayes',
+  Clustering = 'Clustering',
+  HyperparameterTuning = 'Hyperparameter Tuning',
+  Visualizations = 'Visualizations',
+  AML = 'Advanced Machine Leraning',
+  ClassifierFusion = 'Classifier Fusion',
+  ScikitLearn = 'Scikit Learn',
+}
+
 export const questions: Question[] = [
   {
     id: 1,
-    topic: 'AML',
+    topic: [TopicEnum.AML, TopicEnum.SupportVectorMachines],
     question: 'The hyperplane of the SVM of a dataset with 3 features is a',
     options: ['point', 'line', 'plane', 'circle'],
     answer: 'plane',
@@ -12,7 +26,7 @@ export const questions: Question[] = [
   },
   {
     id: 2,
-    topic: 'AML',
+    topic: [TopicEnum.AML, TopicEnum.NeuralNetworks],
     question:
       'In an MLP, what it means when we specify hidden_layer_sizes = (5,3,2)',
     options: [
@@ -28,7 +42,7 @@ export const questions: Question[] = [
   },
   {
     id: 3,
-    topic: 'AML',
+    topic: [TopicEnum.AML, TopicEnum.NeuralNetworks],
     question: 'What is the main role of the convolution operation?',
     options: [
       'create sequence of data from the given data',
@@ -42,7 +56,7 @@ export const questions: Question[] = [
   },
   {
     id: 4,
-    topic: 'AML',
+    topic: [TopicEnum.AML, TopicEnum.NaiveBayes],
     question:
       'The probability when a fair coin is tossed 2 times then at least one of them are heads:',
     options: ['1/4', '1/2', '3/4', '1'],
@@ -52,7 +66,7 @@ export const questions: Question[] = [
   },
   {
     id: 5,
-    topic: 'AML',
+    topic: [TopicEnum.AML, TopicEnum.TimeSeriesRNN],
     question: 'Image captioning is which type of RNN?',
     options: ['Many to One', 'One to One', 'Many to Many', 'One to Many'],
     answer: 'One to Many',
@@ -61,7 +75,7 @@ export const questions: Question[] = [
   },
   {
     id: 6,
-    topic: 'AML',
+    topic: [TopicEnum.AML, TopicEnum.DataPreprocessing],
     question: 'PCA is',
     options: [
       'unsupervised learning algorithm',
@@ -75,7 +89,7 @@ export const questions: Question[] = [
   },
   {
     id: 7,
-    topic: 'AML',
+    topic: [TopicEnum.AML, TopicEnum.SupportVectorMachines],
     question: 'The dimension of the hyperplane of an SVM is based on',
     options: [
       'number of features',
@@ -89,7 +103,7 @@ export const questions: Question[] = [
   },
   {
     id: 8,
-    topic: 'AML',
+    topic: [TopicEnum.AML, TopicEnum.SupportVectorMachines],
     question: 'The hyperplane of SVM is generated based on',
     options: [
       'all instances',
@@ -103,7 +117,7 @@ export const questions: Question[] = [
   },
   {
     id: 9,
-    topic: 'AML',
+    topic: [TopicEnum.AML, TopicEnum.NeuralNetworks],
     question: 'The range of the output of a ReLU activation function?',
     options: ['[-1, 1]', '[0, 1]', '[0, ∞ ]', '[-∞ , ∞ ]'],
     answer: '[0, ∞ ]',
@@ -112,7 +126,7 @@ export const questions: Question[] = [
   },
   {
     id: 10,
-    topic: 'AML',
+    topic: [TopicEnum.AML, TopicEnum.NeuralNetworks],
     question: 'What is the advantage of using CNN?',
     options: [
       'PCA works really well',
@@ -126,7 +140,7 @@ export const questions: Question[] = [
   },
   {
     id: 11,
-    topic: 'AML',
+    topic: [TopicEnum.AML],
     question: 'Logistic regression is for',
     options: [
       'Outlier Detection',
@@ -140,7 +154,7 @@ export const questions: Question[] = [
   },
   {
     id: 12,
-    topic: 'AML',
+    topic: [TopicEnum.AML, TopicEnum.TimeSeriesRNN],
     question: 'The increase in the number of patients due to frostbite is',
     options: ['seasonal variation', 'trend', 'irregular variation', 'residue'],
     answer: 'seasonal variation',
@@ -149,7 +163,7 @@ export const questions: Question[] = [
   },
   {
     id: 13,
-    topic: 'AML',
+    topic: [TopicEnum.AML, TopicEnum.NeuralNetworks],
     question:
       'We have an image of size 7x7 with valid padding, on which a filter of size 3x3 is applied with a stride of 2. What will be the size of the convoluted matrix?',
     options: ['4x4', '6x6', '5x5', '3x3'],
@@ -159,7 +173,7 @@ export const questions: Question[] = [
   },
   {
     id: 14,
-    topic: 'AML',
+    topic: [TopicEnum.AML, TopicEnum.NeuralNetworks],
     question:
       'We have an input image of size 28x28. A filter of size 7x7 is applied with a stride of 1. What will be the size of the convoluted matrix?',
     options: ['21x21', '35x35', '22x22', '25x25'],
@@ -169,7 +183,7 @@ export const questions: Question[] = [
   },
   {
     id: 15,
-    topic: 'AML',
+    topic: [TopicEnum.AML, TopicEnum.SupportVectorMachines],
     question: 'Support Vectors can influence',
     options: [
       'Position of the hyper plane',
@@ -183,7 +197,7 @@ export const questions: Question[] = [
   },
   {
     id: 16,
-    topic: 'AML',
+    topic: [TopicEnum.AML, TopicEnum.NeuralNetworks],
     question: 'Same padding means',
     options: [
       'add 1 padding on both sides',
@@ -197,7 +211,7 @@ export const questions: Question[] = [
   },
   {
     id: 17,
-    topic: 'AML',
+    topic: [TopicEnum.AML, TopicEnum.NeuralNetworks],
     question:
       'The number of nodes in the input layer is 10 and the hidden layer is 6. The maximum number of connections from the input layer to the hidden layer is',
     options: [
@@ -212,7 +226,7 @@ export const questions: Question[] = [
   },
   {
     id: 18,
-    topic: 'AML',
+    topic: [TopicEnum.AML, TopicEnum.DataPreprocessing],
     question:
       'If your dataset is unlabeled, which technique is the best to reduce the dimensionality of this dataset?',
     options: [
@@ -228,7 +242,7 @@ export const questions: Question[] = [
 
   {
     id: 19,
-    topic: 'AML',
+    topic: [TopicEnum.AML, TopicEnum.NeuralNetworks],
     question:
       'For a neural network, which of the following affects the trade-off between underfitting and overfitting?',
     options: [
@@ -243,7 +257,7 @@ export const questions: Question[] = [
   },
   {
     id: 20,
-    topic: 'AML',
+    topic: [TopicEnum.AML, TopicEnum.NaiveBayes],
     question: 'What are the strong assumptions that we make in Naïve Bayes:',
     options: [
       'Features are dependent, numerical data to be converted to categorical',
@@ -258,7 +272,7 @@ export const questions: Question[] = [
   },
   {
     id: 21,
-    topic: 'AML',
+    topic: [TopicEnum.AML, TopicEnum.SupportVectorMachines],
     question: 'The hyperplane of the SVM of a dataset with 2 features is a',
     options: ['line', 'point', 'circle', 'plane'],
     answer: 'line',
@@ -267,7 +281,7 @@ export const questions: Question[] = [
   },
   {
     id: 22,
-    topic: 'AML',
+    topic: [TopicEnum.AML, TopicEnum.DataPreprocessing],
     question:
       'If noise dominates in your dataset, which technique is the best to reduce the dimensionality of this dataset?',
     options: [
@@ -282,7 +296,7 @@ export const questions: Question[] = [
   },
   {
     id: 23,
-    topic: 'AML',
+    topic: [TopicEnum.AML, TopicEnum.NeuralNetworks],
     question: 'CNN is best suited for',
     options: [
       'Temperature dataset with daily temperatures from Jan-Dec 2022',
@@ -296,7 +310,7 @@ export const questions: Question[] = [
   },
   {
     id: 24,
-    topic: 'AML',
+    topic: [TopicEnum.AML, TopicEnum.NeuralNetworks],
     question: 'What is the main role of Pooling?',
     options: [
       'extract dominant features',
@@ -310,7 +324,7 @@ export const questions: Question[] = [
   },
   {
     id: 25,
-    topic: 'AML',
+    topic: [TopicEnum.AML, TopicEnum.NaiveBayes],
     question: 'The conditional probability P(A|is',
     options: [
       '$P(A|= \\frac{P(A∪B)}{P(B)}$',
@@ -324,7 +338,7 @@ export const questions: Question[] = [
   },
   {
     id: 26,
-    topic: 'AML',
+    topic: [TopicEnum.AML, TopicEnum.DataPreprocessing],
     question:
       'What is the primary goal of the project, and how will the insights from the data help address the business problem?',
     options: [
@@ -339,7 +353,7 @@ export const questions: Question[] = [
   },
   {
     id: 27,
-    topic: 'AML',
+    topic: [TopicEnum.AML, TopicEnum.DataPreprocessing],
     question:
       'What are the key metrics or performance indicators that will define the success of the project?',
     options: [
@@ -354,7 +368,7 @@ export const questions: Question[] = [
   },
   {
     id: 28,
-    topic: 'AML',
+    topic: [TopicEnum.AML, TopicEnum.DataPreprocessing],
     question:
       'What types of data sources are available, and how reliable are they for the intended analysis?',
     options: [
@@ -370,7 +384,7 @@ export const questions: Question[] = [
   },
   {
     id: 29,
-    topic: 'AML',
+    topic: [TopicEnum.AML],
     question:
       'How do you plan to identify and address any missing or incomplete data in the dataset?',
     options: [
@@ -386,7 +400,7 @@ export const questions: Question[] = [
   },
   {
     id: 30,
-    topic: 'AML',
+    topic: [TopicEnum.AML, TopicEnum.Visualizations],
     question:
       'What visualizations and statistical analyses will be conducted to uncover trends and patterns in the data?',
     options: [
@@ -401,7 +415,7 @@ export const questions: Question[] = [
   },
   {
     id: 31,
-    topic: 'AML',
+    topic: [TopicEnum.AML, TopicEnum.Visualizations],
     question:
       'How will you test for correlations between features, and what steps will be taken if strong associations are found?',
     options: [
@@ -417,7 +431,7 @@ export const questions: Question[] = [
   },
   {
     id: 32,
-    topic: 'AML',
+    topic: [TopicEnum.AML, TopicEnum.DataPreprocessing],
     question:
       'What criteria will you use to select the most relevant features for the model?',
     options: [
@@ -433,7 +447,7 @@ export const questions: Question[] = [
   },
   {
     id: 33,
-    topic: 'AML',
+    topic: [TopicEnum.AML, TopicEnum.DataPreprocessing],
     question:
       'How will you handle noise or errors in the dataset during the data cleaning process?',
     options: [
@@ -448,7 +462,7 @@ export const questions: Question[] = [
   },
   {
     id: 34,
-    topic: 'AML',
+    topic: [TopicEnum.AML, TopicEnum.DataPreprocessing],
     question:
       'What machine learning algorithms (supervised or unsuperviseare being considered, and why are they appropriate for the project?',
     options: [
@@ -464,7 +478,7 @@ export const questions: Question[] = [
   },
   {
     id: 35,
-    topic: 'AML',
+    topic: [TopicEnum.AML, TopicEnum.DataPreprocessing],
     question:
       "How will you evaluate the model's performance, and what metrics will be used to assess accuracy, precision, and recall?",
     options: [
@@ -480,7 +494,7 @@ export const questions: Question[] = [
   },
   {
     id: 36,
-    topic: 'AML',
+    topic: [TopicEnum.AML, TopicEnum.Visualizations],
     question: 'In Power BI, what is the purpose of the DAX language?',
     options: [
       'It is used for designing the visual interface of reports.',
@@ -494,7 +508,7 @@ export const questions: Question[] = [
   },
   {
     id: 37,
-    topic: 'AML',
+    topic: [TopicEnum.AML, TopicEnum.Visualizations],
     question:
       'What type of data sources can Power BI connect to for data analysis?',
     options: [
@@ -510,7 +524,7 @@ export const questions: Question[] = [
   },
   {
     id: 38,
-    topic: 'AML',
+    topic: [TopicEnum.AML, TopicEnum.Visualizations],
     question: 'How can you refresh data in Power BI?',
     options: [
       'Manually import the data again',
@@ -524,7 +538,7 @@ export const questions: Question[] = [
   },
   {
     id: 39,
-    topic: 'AML',
+    topic: [TopicEnum.AML, TopicEnum.Visualizations],
     question: "What is the purpose of Tableau's 'Calculated Field'?",
     options: [
       'To visualize data trends',
@@ -539,7 +553,7 @@ export const questions: Question[] = [
   },
   {
     id: 40,
-    topic: 'AML',
+    topic: [TopicEnum.AML, TopicEnum.Visualizations],
     question:
       'Which type of join can Tableau use when combining data from multiple tables?',
     options: ['Left Join', 'Inner Join', 'Outer Join', 'All of the above'],
@@ -549,7 +563,7 @@ export const questions: Question[] = [
   },
   {
     id: 41,
-    topic: 'AML',
+    topic: [TopicEnum.AML, TopicEnum.Visualizations],
     question:
       'How can you ensure that Tableau visualizations are interactive for the user?',
     options: [
@@ -564,7 +578,7 @@ export const questions: Question[] = [
   },
   {
     id: 42,
-    topic: 'AML',
+    topic: [TopicEnum.AML, TopicEnum.Visualizations],
     question:
       'Which feature of Tableau allows you to combine data from multiple sources into a single view?',
     options: [
@@ -579,7 +593,7 @@ export const questions: Question[] = [
   },
   {
     id: 43,
-    topic: 'AML',
+    topic: [TopicEnum.AML, TopicEnum.Visualizations],
     question: "What is Power BI's 'Report'?",
     options: [
       'A snapshot of the data',
@@ -594,7 +608,7 @@ export const questions: Question[] = [
   },
   {
     id: 44,
-    topic: 'AML',
+    topic: [TopicEnum.AML, TopicEnum.Visualizations],
     question: "What is Power BI's 'Power Query' used for?",
     options: [
       'It is used for data visualization',
@@ -608,7 +622,7 @@ export const questions: Question[] = [
   },
   {
     id: 45,
-    topic: 'AML',
+    topic: [TopicEnum.AML, TopicEnum.Visualizations],
     question: "What is Tableau's 'Extract' feature used for?",
     options: [
       'To remove unnecessary data from the dataset',
@@ -619,5 +633,715 @@ export const questions: Question[] = [
     answer: 'To create a snapshot of the data that improves performance',
     explanation:
       "Tableau's Extract feature creates a snapshot of the data, improving performance by reducing the need to query live data sources.",
+  },
+  {
+    id: 46,
+    topic: [TopicEnum.AML, TopicEnum.Clustering],
+    question: 'What type of clustering algorithm does kMeans represent?',
+    options: [
+      'Partitional clustering',
+      'Density-based clustering',
+      'Distribution-based clustering',
+      'Hierarchical clustering',
+    ],
+    answer: 'Partitional clustering',
+    explanation:
+      'kMeans is a partitional clustering algorithm that assigns data points to clusters based on their proximity to centroids.',
+  },
+  {
+    id: 47,
+    topic: [TopicEnum.AML, TopicEnum.Clustering],
+    question:
+      'Which clustering algorithm groups data based on density of points in a region?',
+    options: [
+      'DBSCAN',
+      'kMeans',
+      'Agglomerative Clustering',
+      'Expectation-Maximization',
+    ],
+    answer: 'DBSCAN',
+    explanation:
+      'DBSCAN (Density-Based Spatial Clustering of Applications with Noise) groups data based on the density of data points in a region.',
+  },
+  {
+    id: 48,
+    topic: [TopicEnum.AML, TopicEnum.Clustering],
+    question:
+      'In DBSCAN, what do we call a point that has fewer than the minimum required neighbors within a given radius?',
+    options: ['Noise point', 'Core point', 'Border point', 'Centroid'],
+    answer: 'Noise point',
+    explanation:
+      'In DBSCAN, a noise point is one that does not meet the criteria to be a core point or border point.',
+  },
+  {
+    id: 49,
+    topic: [TopicEnum.AML, TopicEnum.Clustering],
+    question:
+      'Which of the following clustering types assigns probabilities to data points belonging to each cluster?',
+    options: [
+      'Soft clustering',
+      'Hard clustering',
+      'Hierarchical clustering',
+      'Partitional clustering',
+    ],
+    answer: 'Soft clustering',
+    explanation:
+      'Soft clustering, used in models like Expectation-Maximization, assigns each point a probability of belonging to each cluster.',
+  },
+  {
+    id: 50,
+    topic: [TopicEnum.AML, TopicEnum.Clustering],
+    question:
+      'Which clustering method builds a tree-like structure without requiring a predefined number of clusters?',
+    options: [
+      'Hierarchical clustering',
+      'Partitional clustering',
+      'kMeans',
+      'DBSCAN',
+    ],
+    answer: 'Hierarchical clustering',
+    explanation:
+      'Hierarchical clustering creates a dendrogram and does not require predefining the number of clusters.',
+  },
+  {
+    id: 51,
+    topic: [TopicEnum.AML, TopicEnum.Clustering],
+    question: 'What does the Expectation step in the EM algorithm do?',
+    options: [
+      'Estimates the probability of each point belonging to a cluster',
+      'Updates cluster centroids',
+      'Removes noise points',
+      'Determines the number of clusters',
+    ],
+    answer: 'Estimates the probability of each point belonging to a cluster',
+    explanation:
+      'The Expectation step calculates the probability that each data point belongs to each of the clusters.',
+  },
+  {
+    id: 52,
+    topic: [TopicEnum.AML, TopicEnum.Clustering],
+    question:
+      'In hierarchical clustering, which linkage method considers the shortest distance between points in two clusters?',
+    options: [
+      'Single linkage',
+      'Complete linkage',
+      'Average linkage',
+      'Centroid linkage',
+    ],
+    answer: 'Single linkage',
+    explanation:
+      'Single linkage determines the distance between two clusters based on the shortest distance between any two points in the clusters.',
+  },
+  {
+    id: 53,
+    topic: [TopicEnum.AML, TopicEnum.Clustering],
+    question: 'Which statement best describes the limitation of kMeans?',
+    options: [
+      'It requires the number of clusters to be specified beforehand.',
+      'It works well with clusters of arbitrary shapes.',
+      'It performs soft clustering by default.',
+      'It uses a probabilistic model to cluster data.',
+    ],
+    answer: 'It requires the number of clusters to be specified beforehand.',
+    explanation:
+      'kMeans needs the user to specify k, the number of clusters, which may not always be known.',
+  },
+  {
+    id: 54,
+    topic: [TopicEnum.AML, TopicEnum.Clustering],
+    question: 'What are the core components used to classify points in DBSCAN?',
+    options: [
+      'Core, Border, Noise',
+      'Centroid, Radius, Mean',
+      'Gaussian, Mean, Variance',
+      'Hard, Soft, Fuzzy',
+    ],
+    answer: 'Core, Border, Noise',
+    explanation:
+      'DBSCAN categorizes points as Core, Border, or Noise based on density and neighborhood radius.',
+  },
+  {
+    id: 55,
+    topic: [TopicEnum.AML, TopicEnum.HyperparameterTuning],
+    question:
+      'What is the main purpose of hyperparameter tuning in machine learning?',
+    options: [
+      'To select the set of optimal hyperparameters that improves model accuracy, prevents overfitting/underfitting, and ensures efficient resource use',
+      'To adjust model weights and biases during training',
+      'To add more features to the dataset',
+      "To optimize the model's computational resources",
+    ],
+    answer:
+      'To select the set of optimal hyperparameters that improves model accuracy, prevents overfitting/underfitting, and ensures efficient resource use',
+    explanation:
+      "Hyperparameter tuning is crucial for improving a model's performance and ensuring it generalizes well to unseen data.",
+  },
+  {
+    id: 56,
+    topic: [TopicEnum.AML, TopicEnum.HyperparameterTuning],
+    question: 'How do hyperparameters differ from model parameters?',
+    options: [
+      'Hyperparameters are set before training, while parameters are learned during training',
+      'Hyperparameters are learned during training, while parameters are set before training',
+      'Both hyperparameters and parameters are learned during training',
+      'Both hyperparameters and parameters are set before training',
+    ],
+    answer:
+      'Hyperparameters are set before training, while parameters are learned during training',
+    explanation:
+      'Hyperparameters define model configuration before training, whereas parameters (like weights) are learned as the model trains.',
+  },
+  {
+    id: 57,
+    topic: [TopicEnum.AML, TopicEnum.HyperparameterTuning],
+    question:
+      "Why is tuning hyperparameters important for a machine learning model's performance?",
+    options: [
+      'It improves model accuracy and prevents overfitting/underfitting',
+      'It reduces the number of features in the model',
+      'It helps increase the size of the training dataset',
+      'It changes the model’s underlying architecture',
+    ],
+    answer: 'It improves model accuracy and prevents overfitting/underfitting',
+    explanation:
+      'Proper hyperparameter tuning ensures optimal performance and reduces the risk of overfitting or underfitting.',
+  },
+  {
+    id: 58,
+    topic: [TopicEnum.AML, TopicEnum.HyperparameterTuning],
+    question:
+      'Which hyperparameter tuning technique tests all possible combinations of specified hyperparameter values?',
+    options: [
+      'Grid Search',
+      'Random Search',
+      'Manual Search',
+      'Bayesian Optimization',
+    ],
+    answer: 'Grid Search',
+    explanation:
+      'Grid Search exhaustively evaluates all possible combinations of specified hyperparameters to find the optimal set.',
+  },
+  {
+    id: 59,
+    topic: [TopicEnum.AML, TopicEnum.HyperparameterTuning],
+    question: 'What does `GridSearchCV` do in scikit-learn?',
+    options: [
+      'It performs an exhaustive search over all specified hyperparameter values using cross-validation',
+      'It randomly selects a few hyperparameters for evaluation',
+      'It fine-tunes model parameters during training',
+      'It splits the dataset into multiple subsets for parallel processing',
+    ],
+    answer:
+      'It performs an exhaustive search over all specified hyperparameter values using cross-validation',
+    explanation:
+      '`GridSearchCV` is used to search over a range of hyperparameters and determine the best combination for the model.',
+  },
+  {
+    id: 60,
+    topic: [TopicEnum.AML, TopicEnum.HyperparameterTuning],
+    question:
+      'In the context of `GridSearchCV`, what does `param_grid` contain?',
+    options: [
+      'A dictionary specifying the hyperparameters and their candidate values for tuning',
+      'A list of the training data subsets',
+      'The range of possible model outputs',
+      'A function to calculate model loss',
+    ],
+    answer:
+      'A dictionary specifying the hyperparameters and their candidate values for tuning',
+    explanation:
+      '`param_grid` is a dictionary that defines the hyperparameters to search over and their possible values during grid search.',
+  },
+  {
+    id: 61,
+    topic: [TopicEnum.AML, TopicEnum.HyperparameterTuning],
+    question:
+      'What is the purpose of `best_params_` in both `GridSearchCV` and `RandomizedSearchCV`?',
+    options: [
+      'It stores the combination of hyperparameters that gave the best performance during cross-validation',
+      'It computes the best training data subset for evaluation',
+      "It validates the model's final performance after training",
+      'It specifies the final model architecture after tuning',
+    ],
+    answer:
+      'It stores the combination of hyperparameters that gave the best performance during cross-validation',
+    explanation:
+      '`best_params_` contains the optimal hyperparameter values that produced the best performance during cross-validation.',
+  },
+  {
+    id: 62,
+    topic: [TopicEnum.AML, TopicEnum.HyperparameterTuning],
+    question:
+      'What is the difference between `GridSearchCV` and `RandomizedSearchCV`?',
+    options: [
+      '`GridSearchCV` evaluates all possible combinations, while `RandomizedSearchCV` samples a fixed number of random combinations',
+      '`GridSearchCV` is faster than `RandomizedSearchCV`',
+      '`RandomizedSearchCV` always uses more hyperparameter values than `GridSearchCV`',
+      '`GridSearchCV` is only available for classification models',
+    ],
+    answer:
+      '`GridSearchCV` evaluates all possible combinations, while `RandomizedSearchCV` samples a fixed number of random combinations',
+    explanation:
+      '`GridSearchCV` performs a comprehensive search, whereas `RandomizedSearchCV` randomly samples combinations, making it more efficient in large search spaces.',
+  },
+  {
+    id: 63,
+    topic: [TopicEnum.AML, TopicEnum.HyperparameterTuning],
+    question:
+      'What Python module is commonly used to define random distributions for `RandomizedSearchCV`?',
+    options: ['scipy.stats', 'numpy', 'matplotlib', 'sklearn.linear_model'],
+    answer: 'scipy.stats',
+    explanation:
+      '`scipy.stats` provides random distributions like `randint` that are used in `RandomizedSearchCV` for defining the search space.',
+  },
+  {
+    id: 64,
+    topic: [TopicEnum.AML, TopicEnum.ClassifierFusion],
+    question:
+      'What is the main effect of high bias in a machine learning model?',
+    options: [
+      'The model underfits and fails to capture important patterns',
+      'The model overfits and captures noise along with patterns',
+      'The model performs excellently on both training and test data',
+      'The model has high variance and fluctuates with small changes in data',
+    ],
+    answer: 'The model underfits and fails to capture important patterns',
+    explanation:
+      'High bias indicates underfitting, where the model oversimplifies the problem and fails to capture significant patterns.',
+  },
+  {
+    id: 65,
+    topic: [TopicEnum.AML, TopicEnum.ClassifierFusion],
+    question:
+      'Which of the following is a solution for addressing high bias in machine learning?',
+    options: [
+      'Increase model complexity, add features',
+      'Simplify the model, add more data',
+      'Reduce training data size',
+      'Use regularization',
+    ],
+    answer: 'Increase model complexity, add features',
+    explanation:
+      'To address high bias, increasing model complexity or adding more features can help the model capture more patterns.',
+  },
+  {
+    id: 66,
+    topic: [TopicEnum.AML, TopicEnum.ClassifierFusion],
+    question:
+      'What is the primary cause of high variance in a machine learning model?',
+    options: [
+      'The model captures noise along with patterns',
+      'The model fails to capture important patterns',
+      'The model uses a small training dataset',
+      'The model complexity is too low',
+    ],
+    answer: 'The model captures noise along with patterns',
+    explanation:
+      'High variance indicates overfitting, where the model becomes overly sensitive to fluctuations in the training data.',
+  },
+  {
+    id: 67,
+    topic: [TopicEnum.AML, TopicEnum.ClassifierFusion],
+    question:
+      'What is the main effect of high variance in a machine learning model?',
+    options: [
+      'The model performs excellently on training data but poorly on test data',
+      'The model fails to capture any patterns in the data',
+      'The model underfits and shows poor performance on both training and test data',
+      'The model is insensitive to small changes in training data',
+    ],
+    answer:
+      'The model performs excellently on training data but poorly on test data',
+    explanation:
+      'High variance results in overfitting, where the model performs well on training data but fails to generalize to new, unseen data.',
+  },
+  {
+    id: 68,
+    topic: [TopicEnum.AML, TopicEnum.ClassifierFusion],
+    question:
+      'Which of the following techniques is used to reduce variance in a model?',
+    options: [
+      'Simplify the model, add more data, use regularization',
+      'Increase model complexity',
+      'Add more features to the model',
+      'Use a more complex algorithm',
+    ],
+    answer: 'Simplify the model, add more data, use regularization',
+    explanation:
+      'Reducing variance typically involves simplifying the model, adding more data, or using techniques like regularization.',
+  },
+  {
+    id: 69,
+    topic: [TopicEnum.AML, TopicEnum.ClassifierFusion],
+    question: 'What is the primary purpose of bagging (Bootstrap Aggregating)?',
+    options: [
+      'To reduce variance and improve model stability by combining multiple models',
+      'To improve model performance by increasing the complexity of the base models',
+      'To reduce bias by focusing on misclassified instances',
+      'To create a single, more powerful model by combining various models',
+    ],
+    answer:
+      'To reduce variance and improve model stability by combining multiple models',
+    explanation:
+      'Bagging aims to reduce variance by combining the predictions of multiple models trained on random subsets of the data.',
+  },
+  {
+    id: 70,
+    topic: [TopicEnum.AML, TopicEnum.ClassifierFusion],
+    question:
+      'In the context of bagging, what is the method used to create training data subsets?',
+    options: [
+      'Sampling with replacement',
+      'Randomly selecting a subset of features',
+      'Using all available data without repetition',
+      'Clustering the data before sampling',
+    ],
+    answer: 'Sampling with replacement',
+    explanation:
+      'Bagging uses sampling with replacement to create multiple random subsets of the training data for training different models.',
+  },
+  {
+    id: 71,
+    topic: [TopicEnum.AML, TopicEnum.ClassifierFusion],
+    question: 'What is the final prediction method in bagging models?',
+    options: [
+      'Majority vote or averaging',
+      'Weighted average of predictions',
+      'Simple arithmetic mean',
+      'Voting based on confidence scores',
+    ],
+    answer: 'Majority vote or averaging',
+    explanation:
+      'In bagging, the final prediction is made by aggregating the predictions of multiple models through majority voting (for classification) or averaging (for regression).',
+  },
+  {
+    id: 72,
+    topic: [TopicEnum.AML, TopicEnum.ClassifierFusion],
+    question:
+      'Which of the following is a key difference between bagging and random forest?',
+    options: [
+      'Random Forest introduces randomness in feature selection at each split, while bagging uses all features',
+      'Random Forest uses more models than bagging',
+      'Bagging involves sequential model training, while Random Forest trains models in parallel',
+      'Bagging selects random features at each split, whereas Random Forest uses all features',
+    ],
+    answer:
+      'Random Forest introduces randomness in feature selection at each split, while bagging uses all features',
+    explanation:
+      'Random Forest further improves bagging by adding randomization in feature selection at each split to reduce correlation between trees.',
+  },
+  {
+    id: 73,
+    topic: [TopicEnum.AML, TopicEnum.ClassifierFusion],
+    question: 'When is bagging most useful?',
+    options: [
+      'When the base model is unstable and prone to high variance',
+      'When the data is linearly separable',
+      'When the model needs to capture complex patterns in the data',
+      'When the training data is very small',
+    ],
+    answer: 'When the base model is unstable and prone to high variance',
+    explanation:
+      'Bagging is most effective for unstable models like decision trees, as it reduces variance and improves stability.',
+  },
+  {
+    id: 74,
+    topic: [TopicEnum.AML, TopicEnum.ClassifierFusion],
+    question: 'What is the primary purpose of boosting in machine learning?',
+    options: [
+      'To reduce bias by sequentially improving weak models based on misclassified instances',
+      'To reduce variance by combining multiple models in parallel',
+      'To simplify the model by removing irrelevant features',
+      'To combine predictions from different algorithms',
+    ],
+    answer:
+      'To reduce bias by sequentially improving weak models based on misclassified instances',
+    explanation:
+      'Boosting works by iteratively training weak learners, focusing on the instances that previous learners misclassified, which reduces bias.',
+  },
+  {
+    id: 75,
+    topic: [TopicEnum.AML, TopicEnum.ClassifierFusion],
+    question: 'What is the key characteristic of boosting algorithms?',
+    options: [
+      'They focus on the misclassified instances by adjusting their weights in each iteration',
+      'They combine models trained on different data subsets in parallel',
+      'They create a single model by averaging the predictions of multiple models',
+      'They rely on cross-validation to improve model accuracy',
+    ],
+    answer:
+      'They focus on the misclassified instances by adjusting their weights in each iteration',
+    explanation:
+      'Boosting algorithms like AdaBoost adjust the weight of misclassified instances to focus on improving model accuracy for those samples.',
+  },
+  {
+    id: 76,
+    topic: [TopicEnum.AML, TopicEnum.ClassifierFusion],
+    question: 'In stacking, how is the final prediction made?',
+    options: [
+      'By using a meta-model to learn from the predictions of base models',
+      'By averaging the predictions of base models',
+      'By choosing the best base model based on its accuracy',
+      'By using the majority vote of base models',
+    ],
+    answer:
+      'By using a meta-model to learn from the predictions of base models',
+    explanation:
+      'Stacking combines multiple base models and uses a meta-model to learn from their predictions to make the final prediction.',
+  },
+  {
+    id: 77,
+    topic: [TopicEnum.AML, TopicEnum.ScikitLearn],
+    question:
+      'Which parameter should you adjust if you want to control the depth of a decision tree in scikit-learn?',
+    options: [
+      'max_depth',
+      'n_estimators',
+      'learning_rate',
+      'min_samples_split',
+    ],
+    answer: 'max_depth',
+    explanation:
+      'The `max_depth` parameter controls the maximum depth of the tree, preventing it from growing too deep and overfitting the data.',
+  },
+  {
+    id: 78,
+    topic: [TopicEnum.AML, TopicEnum.ScikitLearn],
+    question:
+      'Which parameter should you adjust to change the number of neighbors in a k-Nearest Neighbors (kNN) model in scikit-learn?',
+    options: ['n_neighbors', 'algorithm', 'metric', 'leaf_size'],
+    answer: 'n_neighbors',
+    explanation:
+      'The `n_neighbors` parameter defines the number of neighbors to use for classification or regression in a kNN model.',
+  },
+  {
+    id: 79,
+    topic: [TopicEnum.AML, TopicEnum.ScikitLearn],
+    question:
+      'Which parameter should be set in scikit-learn’s `LogisticRegression` to adjust the regularization strength?',
+    options: ['C', 'penalty', 'solver', 'max_iter'],
+    answer: 'C',
+    explanation:
+      'The `C` parameter controls the regularization strength in logistic regression. A smaller value means stronger regularization.',
+  },
+  {
+    id: 80,
+    topic: [TopicEnum.AML, TopicEnum.ScikitLearn],
+    question:
+      "Which parameter in scikit-learn's `RandomForestClassifier` can be used to control the minimum number of samples required to split an internal node?",
+    options: ['min_samples_split', 'n_estimators', 'max_features', 'max_depth'],
+    answer: 'min_samples_split',
+    explanation:
+      'The `min_samples_split` parameter determines the minimum number of samples required to split an internal node in a decision tree.',
+  },
+  {
+    id: 81,
+    topic: [TopicEnum.AML, TopicEnum.ScikitLearn],
+    question:
+      "Which parameter should you use in scikit-learn's `SVC` (Support Vector Classifier) to adjust the penalty for misclassification?",
+    options: ['C', 'kernel', 'gamma', 'degree'],
+    answer: 'C',
+    explanation:
+      'The `C` parameter in `SVC` controls the penalty for misclassification. A higher value of `C` aims to reduce misclassification but may lead to overfitting.',
+  },
+  {
+    id: 82,
+    topic: [TopicEnum.AML, TopicEnum.ScikitLearn],
+    question:
+      'Which parameter should you adjust in a `RandomForestRegressor` to control the number of trees in the forest?',
+    options: ['n_estimators', 'max_depth', 'min_samples_split', 'max_features'],
+    answer: 'n_estimators',
+    explanation:
+      "The `n_estimators` parameter controls the number of trees in the forest. Increasing this value can improve the model's accuracy.",
+  },
+  {
+    id: 83,
+    topic: [TopicEnum.AML, TopicEnum.ScikitLearn],
+    question:
+      "In scikit-learn's `GradientBoostingClassifier`, which parameter controls the learning rate of the boosting process?",
+    options: ['learning_rate', 'n_estimators', 'max_depth', 'subsample'],
+    answer: 'learning_rate',
+    explanation:
+      'The `learning_rate` parameter controls the contribution of each tree to the final prediction. A lower value makes the model more robust but slower to converge.',
+  },
+  {
+    id: 84,
+    topic: [TopicEnum.AML, TopicEnum.ScikitLearn],
+    question:
+      "Which parameter should you adjust in scikit-learn's `KMeans` to control the number of clusters?",
+    options: ['n_clusters', 'max_iter', 'init', 'algorithm'],
+    answer: 'n_clusters',
+    explanation:
+      'The `n_clusters` parameter specifies the number of clusters to form in the KMeans clustering algorithm.',
+  },
+  {
+    id: 85,
+    topic: [TopicEnum.AML, TopicEnum.ScikitLearn],
+    question:
+      'Which parameter in scikit-learn’s `DecisionTreeClassifier` should you adjust to set the minimum number of samples required at a leaf node?',
+    options: [
+      'min_samples_leaf',
+      'max_features',
+      'max_depth',
+      'min_samples_split',
+    ],
+    answer: 'min_samples_leaf',
+    explanation:
+      'The `min_samples_leaf` parameter defines the minimum number of samples required to be at a leaf node. Increasing this value can prevent overfitting.',
+  },
+  {
+    id: 86,
+    topic: [TopicEnum.AML, TopicEnum.ScikitLearn],
+    question:
+      'Which parameter should you adjust in scikit-learn’s `LinearRegression` to include or exclude an intercept term in the model?',
+    options: ['fit_intercept', 'normalize', 'copy_X', 'n_jobs'],
+    answer: 'fit_intercept',
+    explanation:
+      'The `fit_intercept` parameter controls whether the model includes an intercept term. Setting it to `False` forces the model to pass through the origin.',
+  },
+  {
+    id: 87,
+    topic: [TopicEnum.AML, TopicEnum.DataPreprocessing],
+    question: 'What is the main goal of supervised learning?',
+    options: [
+      'To discover hidden patterns in the data',
+      'To predict outcomes based on labeled data',
+      'To group similar data points together',
+      'To reduce the dimensionality of the data',
+    ],
+    answer: 'To predict outcomes based on labeled data',
+    explanation:
+      'Supervised learning models are trained using labeled data to make predictions about future or unseen data.',
+  },
+  {
+    id: 88,
+    topic: [TopicEnum.AML, TopicEnum.DataPreprocessing],
+    question: 'What is the purpose of dimensionality reduction?',
+    options: [
+      'To make the model more interpretable',
+      'To improve model accuracy',
+      'To reduce the complexity of the data',
+      'To add more features to the dataset',
+    ],
+    answer: 'To reduce the complexity of the data',
+    explanation:
+      'Dimensionality reduction helps in simplifying the dataset by reducing the number of features, which can lead to faster computations and reduce overfitting.',
+  },
+  {
+    id: 89,
+    topic: [TopicEnum.AML, TopicEnum.DataPreprocessing],
+    question: 'Which of the following is a method for normalization?',
+    options: [
+      'Binning',
+      'Range Normalization',
+      'Sampling',
+      'Covariance Matrix',
+    ],
+    answer: 'Range Normalization',
+    explanation:
+      'Range normalization rescales data within a specific range, typically [0,1], to ensure that features are on a similar scale.',
+  },
+  {
+    id: 90,
+    topic: [TopicEnum.AML, TopicEnum.DataPreprocessing],
+    question: 'What does PCA do to the data?',
+    options: [
+      'Reduces the number of classes in the data',
+      'Maximizes the class separability',
+      'Reduces the dimensionality of the data while preserving variance',
+      'Transforms data into a non-linear space',
+    ],
+    answer: 'Reduces the dimensionality of the data while preserving variance',
+    explanation:
+      'Principal Component Analysis (PCA) reduces the number of features in the data by creating new features (principal components) that capture the most variance in the data.',
+  },
+  {
+    id: 91,
+    topic: [TopicEnum.AML, TopicEnum.DataPreprocessing],
+    question: 'What is the key difference between PCA and LDA?',
+    options: [
+      'PCA is unsupervised, while LDA is supervised',
+      'PCA uses linear transformations, while LDA uses non-linear transformations',
+      'PCA minimizes class separability, while LDA maximizes it',
+      'PCA works with categorical data, while LDA works with continuous data',
+    ],
+    answer: 'PCA is unsupervised, while LDA is supervised',
+    explanation:
+      'PCA is an unsupervised technique for dimensionality reduction, while LDA is a supervised technique aimed at maximizing class separability.',
+  },
+  {
+    id: 92,
+    topic: [TopicEnum.AML, TopicEnum.DataPreprocessing],
+    question: 'Which of the following is an unsupervised learning technique?',
+    options: [
+      'Decision Trees',
+      'Logistic Regression',
+      'k-Means Clustering',
+      'Random Forest',
+    ],
+    answer: 'k-Means Clustering',
+    explanation:
+      'k-Means is an unsupervised learning algorithm used for clustering, where the goal is to group similar data points together without labeled outputs.',
+  },
+  {
+    id: 93,
+    topic: [TopicEnum.AML, TopicEnum.DataPreprocessing],
+    question: "What does 'curse of dimensionality' refer to?",
+    options: [
+      'The difficulty of visualizing data in higher dimensions',
+      'The increase in complexity and computation time as the number of features increases',
+      'The inability to apply dimensionality reduction techniques',
+      'The need for more data when dealing with high-dimensional datasets',
+    ],
+    answer:
+      'The increase in complexity and computation time as the number of features increases',
+    explanation:
+      'The curse of dimensionality refers to the challenges faced as the number of features grows, leading to increased computational requirements and potential overfitting.',
+  },
+  {
+    id: 94,
+    topic: [TopicEnum.AML, TopicEnum.DataPreprocessing],
+    question:
+      'In Principal Component Analysis (PCA), how is the optimal number of principal components typically determined?',
+    options: [
+      'By selecting the components with the highest variance',
+      'By using cross-validation',
+      'By choosing the components with the smallest eigenvalues',
+      'By examining the scree plot',
+    ],
+    answer: 'By examining the scree plot',
+    explanation:
+      'The scree plot helps visualize the eigenvalues and determine the optimal number of components by identifying the point where the variance explained by additional components levels off.',
+  },
+  {
+    id: 95,
+    topic: [TopicEnum.AML, TopicEnum.DataPreprocessing],
+    question:
+      'What does feature selection do in the context of dimensionality reduction?',
+    options: [
+      'Transforms the data into a new feature space',
+      'Reduces the number of features by selecting a subset of the original features',
+      'Normalizes the data',
+      'Removes duplicates and irrelevant data',
+    ],
+    answer:
+      'Reduces the number of features by selecting a subset of the original features',
+    explanation:
+      'Feature selection helps to identify and keep only the most important features, reducing the complexity of the model without losing significant information.',
+  },
+  {
+    id: 96,
+    topic: [TopicEnum.AML, TopicEnum.DataPreprocessing],
+    question:
+      'Which of the following is NOT a technique used in data preprocessing?',
+    options: [
+      'Data Transformation',
+      'Dimensionality Reduction',
+      'Data Integration',
+      'Random Forest',
+    ],
+    answer: 'Random Forest',
+    explanation:
+      'Random Forest is a machine learning algorithm, not a data preprocessing technique. Preprocessing techniques include transformation, integration, and reduction.',
   },
 ];

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { questions } from '../../data/questions';
+import { questions, TopicEnum } from '../../data/questions';
 import QuestionCard from '../../components/QuestionCard';
 import QuizResult from '../../components/QuizResult';
 import TopicSelector from '../../components/TopicSelector';
@@ -27,11 +27,17 @@ export default function HomePage() {
   >([]);
 
   // Get unique topics from the questions
-  const topics = Array.from(new Set(questions.map((q) => q.topic)));
+  const topics = Object.values(TopicEnum);
 
   // Filter questions based on the selected topic
   const filteredQuestions = selectedTopic
-    ? shuffleArray(questions.filter((q) => q.topic === selectedTopic))
+    ? shuffleArray(
+        questions.filter((q) =>
+          Array.isArray(q.topic)
+            ? q.topic.includes(selectedTopic)
+            : q.topic === selectedTopic
+        )
+      )
     : [];
 
   // Fisher-Yates shuffle function
@@ -89,7 +95,7 @@ export default function HomePage() {
     <Container>
       {!selectedTopic ? (
         <TopicSelector topics={topics} onSelectTopic={handleSelectTopic} />
-      ) : !isFinished ? (
+      ) : !isFinished && filteredQuestions.length !== 0 ? (
         <ProgressWrapper>
           <ProgressText>
             Question {currentIndex + 1} of {filteredQuestions.length}
