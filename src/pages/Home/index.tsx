@@ -6,6 +6,7 @@ import QuizResult from '../../components/QuizResult';
 import TopicSelector from '../../components/TopicSelector';
 import { Container, ProgressText, ProgressWrapper } from './styles';
 import { ReturnButton } from '../../components/ReturnButton';
+import { Question } from '../../types/question';
 
 export default function HomePage() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -30,8 +31,18 @@ export default function HomePage() {
 
   // Filter questions based on the selected topic
   const filteredQuestions = selectedTopic
-    ? questions.filter((q) => q.topic === selectedTopic)
+    ? shuffleArray(questions.filter((q) => q.topic === selectedTopic))
     : [];
+
+  // Fisher-Yates shuffle function
+  function shuffleArray(array: Question[]) {
+    const shuffled = [...array]; // Create a copy to avoid mutating the original
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]; // Swap elements
+    }
+    return shuffled;
+  }
 
   const handleAnswer = (answer: string) => {
     const currentQuestion = filteredQuestions[currentIndex];

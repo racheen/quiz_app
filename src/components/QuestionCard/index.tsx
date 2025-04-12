@@ -1,6 +1,9 @@
 import React from 'react';
+import 'katex/dist/katex.min.css';
+
 import { Question } from '../../types/question';
 import { Card, OptionButton, QuestionText } from './style';
+import DynamicText from '../DynamicText';
 
 type Props = {
   question: Question;
@@ -10,10 +13,12 @@ type Props = {
 const QuestionCard: React.FC<Props> = ({ question, onAnswer }) => {
   return (
     <Card>
-      <QuestionText>{question.question}</QuestionText>
+      <QuestionText>
+        <DynamicText text={question.question} />
+      </QuestionText>
       {question.options.map((option, index) => (
         <OptionButton key={index} onClick={() => onAnswer(option)}>
-          {option}
+          <DynamicText text={option} />
         </OptionButton>
       ))}
     </Card>

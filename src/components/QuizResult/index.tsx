@@ -6,8 +6,10 @@ import {
   QuestionText,
   ResultWrapper,
   ScoreText,
+  StyledExplanationText,
 } from './style';
 import 'katex/dist/katex.min.css';
+import DynamicText from '../DynamicText';
 
 type Answer = {
   question: string;
@@ -19,7 +21,7 @@ type Answer = {
 type Props = {
   score: number;
   total: number;
-  incorrectAnswers: Answer[]; 
+  incorrectAnswers: Answer[];
 };
 
 const QuizResult: React.FC<Props> = ({ score, total, incorrectAnswers }) => {
@@ -35,14 +37,20 @@ const QuizResult: React.FC<Props> = ({ score, total, incorrectAnswers }) => {
           {incorrectAnswers.map((answer, index) => (
             <IncorrectAnswerCard key={index}>
               <QuestionText>
-                <strong>Question:</strong> {answer.question}
+                <strong>Question:</strong>{' '}
+                <DynamicText text={answer.question} />
               </QuestionText>
               <AnswerText>
-                <strong>Your Answer:</strong> {answer.chosenAnswer}
+                <strong>Your Answer:</strong>{' '}
+                <DynamicText text={answer.chosenAnswer} />
               </AnswerText>
               <AnswerText>
-                <strong>Correct Answer:</strong> {answer.correctAnswer}
+                <strong>Correct Answer:</strong>{' '}
+                <DynamicText text={answer.correctAnswer} />
               </AnswerText>
+              <StyledExplanationText>
+                <DynamicText text={answer.explanation} />
+              </StyledExplanationText>
             </IncorrectAnswerCard>
           ))}
         </IncorrectAnswersWrapper>
