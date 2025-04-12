@@ -17,7 +17,7 @@ const MainWrapper = styled.div`
 
 export default function App() {
   const { theme, changeTheme } = useTheme();
-  const isDark = theme.id === 2;
+  const isDark = theme.id === 1;
 
   return (
     <>
