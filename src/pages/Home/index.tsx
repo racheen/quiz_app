@@ -1,35 +1,103 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { questions } from '../../data/questions';
 import QuestionCard from '../../components/QuestionCard';
 import QuizResult from '../../components/QuizResult';
-import { Container } from './styles';
+import TopicSelector from '../../components/TopicSelector';
+import { Container, ProgressText, ProgressWrapper } from './styles';
+import { ReturnButton } from '../../components/ReturnButton';
 
 export default function HomePage() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [score, setScore] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
+  const [selectedTopic, setSelectedTopic] = useState<string | null>(null);
+
+  const navigate = useNavigate(); // Get the navigate function
+
+  // Track incorrect answers
+  const [incorrectAnswers, setIncorrectAnswers] = useState<
+    {
+      question: string;
+      chosenAnswer: string;
+      correctAnswer: string;
+      explanation: string;
+    }[]
+  >([]);
+
+  // Get unique topics from the questions
+  const topics = Array.from(new Set(questions.map((q) => q.topic)));
+
+  // Filter questions based on the selected topic
+  const filteredQuestions = selectedTopic
+    ? questions.filter((q) => q.topic === selectedTopic)
+    : [];
 
   const handleAnswer = (answer: string) => {
-    if (answer === questions[currentIndex].answer) {
+    const currentQuestion = filteredQuestions[currentIndex];
+    if (answer === currentQuestion.answer) {
       setScore(score + 1);
+    } else {
+      // If the answer is incorrect, store the wrong answer with explanation
+      setIncorrectAnswers([
+        ...incorrectAnswers,
+        {
+          question: currentQuestion.question,
+          chosenAnswer: answer,
+          correctAnswer: currentQuestion.answer,
+          explanation: currentQuestion.explanation,
+        },
+      ]);
     }
+
     const next = currentIndex + 1;
-    if (next < questions.length) {
+    if (next < filteredQuestions.length) {
       setCurrentIndex(next);
     } else {
       setIsFinished(true);
     }
   };
 
+  const handleBackToHome = () => {
+    if (window.location.pathname === '/') {
+      window.location.reload(); // Refresh the page
+    } else {
+      navigate('/'); // Navigate to home if not already on it
+    }
+  };
+
+  const handleSelectTopic = (topic: string) => {
+    setSelectedTopic(topic);
+    setCurrentIndex(0); // Reset to the first question of the selected topic
+    setScore(0);
+    setIsFinished(false);
+    setIncorrectAnswers([]); // Reset incorrect answers when selecting a new topic
+  };
+
   return (
     <Container>
-      {!isFinished ? (
-        <QuestionCard
-          question={questions[currentIndex]}
-          onAnswer={handleAnswer}
-        />
+      {!selectedTopic ? (
+        <TopicSelector topics={topics} onSelectTopic={handleSelectTopic} />
+      ) : !isFinished ? (
+        <ProgressWrapper>
+          <ProgressText>
+            Question {currentIndex + 1} of {filteredQuestions.length}
+          </ProgressText>
+          <QuestionCard
+            question={filteredQuestions[currentIndex]}
+            onAnswer={handleAnswer}
+          />
+          <ReturnButton onClick={handleBackToHome} label={'Return to Topics'} />
+        </ProgressWrapper>
       ) : (
-        <QuizResult score={score} total={questions.length} />
+        <>
+          <QuizResult
+            score={score}
+            total={filteredQuestions.length}
+            incorrectAnswers={incorrectAnswers}
+          />{' '}
+          <ReturnButton onClick={handleBackToHome} label={'Back to Home'} />
+        </>
       )}
     </Container>
   );

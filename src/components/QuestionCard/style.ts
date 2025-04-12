@@ -3,8 +3,8 @@ import styled from 'styled-components';
 export const Card = styled.div`
   padding: 2rem;
   border-radius: 1rem;
-  background-color: ${(props) => props.theme.colors.secondary};
-  box-shadow: 0 4px 10px ${(props) => props.theme.shadows.card};
+  background-color: ${(props) => props.theme.colors.background};
+  box-shadow: ${(props) => props.theme.shadows.card};
 `;
 
 export const QuestionText = styled.h2`
@@ -20,8 +20,8 @@ export const OptionButton = styled.button`
   text-align: left;
   padding: 0.75rem 1rem;
   margin-bottom: 0.5rem;
-  background-color: ${(props) => props.theme.colors.accent};
-  border: 2px solid ${(props) => props.theme.colors.lightGray};
+  background-color: ${(props) => props.theme.colors.lightGray};
+  border: 2px solid ${(props) => props.theme.colors.accent};
   border-radius: 0.5rem;
   font-size: ${(props) => props.theme.fontSizes.normal};
   cursor: pointer;

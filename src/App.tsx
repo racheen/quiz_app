@@ -6,6 +6,14 @@ import Home from './pages/Home';
 import GlobalStyle from './theme/globalStyle';
 import Footer from './components/Footer';
 import { ThemeToggle } from './components/ThemeToggle';
+import styled from 'styled-components';
+
+const MainWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensures the wrapper takes at least full viewport height */
+  justify-content: space-between; /* Ensures footer is pushed to the bottom */
+`;
 
 export default function App() {
   const { theme, changeTheme } = useTheme();
@@ -15,13 +23,16 @@ export default function App() {
     <>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <Router>
-          <Routes>
-            <Route path='/' element={<Home />} />
-          </Routes>
-        </Router>
-        <Footer />
-        <ThemeToggle isDark={isDark} onToggle={changeTheme} />
+        <MainWrapper>
+          <Router>
+            <Routes>
+              <Route path='/' element={<Home />} />
+            </Routes>
+          </Router>
+
+          <ThemeToggle isDark={isDark} onToggle={changeTheme} />
+          <Footer />
+        </MainWrapper>
       </ThemeProvider>
     </>
   );

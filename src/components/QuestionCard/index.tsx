@@ -11,8 +11,8 @@ const QuestionCard: React.FC<Props> = ({ question, onAnswer }) => {
   return (
     <Card>
       <QuestionText>{question.question}</QuestionText>
-      {question.options.map((option) => (
-        <OptionButton key={option} onClick={() => onAnswer(option)}>
+      {question.options.map((option, index) => (
+        <OptionButton key={index} onClick={() => onAnswer(option)}>
           {option}
         </OptionButton>
       ))}

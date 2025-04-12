@@ -15,7 +15,7 @@ const colors = {
   secondary: '#063A21', // Secondary Dark Green Color
   text: '#DAD7CD', // White text on dark background
   accent: '#3A5A40', // Event Card Background or Accent Color
-  background: '#081c15', // Main Background Color
+  background: '#595959', // Main Background Color
 };
 
 const fontWeights = {
