@@ -4,19 +4,25 @@ import { questions, TopicEnum } from '../../data/questions';
 import QuestionCard from '../../components/QuestionCard';
 import QuizResult from '../../components/QuizResult';
 import TopicSelector from '../../components/TopicSelector';
-import { Container, ProgressText, ProgressWrapper } from './styles';
+import {
+  Container,
+  IndexButton,
+  IndexButtonContainer,
+  MenuContainer,
+  ProgressText,
+  ProgressWrapper,
+  SubmitButton,
+} from './styles';
 import { ReturnButton } from '../../components/ReturnButton';
 import { Question } from '../../types/question';
+import Modal from '../../components/Modal';
 
 export default function HomePage() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [score, setScore] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
   const [selectedTopic, setSelectedTopic] = useState<string | null>(null);
-
-  const navigate = useNavigate(); // Get the navigate function
-
-  // Track incorrect answers
+  const [answers, setAnswers] = useState<(string | null)[]>([]);
   const [incorrectAnswers, setIncorrectAnswers] = useState<
     {
       question: string;
@@ -25,37 +31,59 @@ export default function HomePage() {
       explanation: string;
     }[]
   >([]);
+  const [shuffledQuestions, setShuffledQuestions] = useState<Question[]>([]);
+  const [showModal, setShowModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
 
-  // Get unique topics from the questions
+  const navigate = useNavigate();
+
   const topics = Object.values(TopicEnum);
 
-  // Filter questions based on the selected topic
-  const filteredQuestions = selectedTopic
-    ? shuffleArray(
-        questions.filter((q) =>
-          Array.isArray(q.topic)
-            ? q.topic.includes(selectedTopic)
-            : q.topic === selectedTopic
-        )
-      )
-    : [];
+  const confirmSubmit = () => {
+    setShowModal(false);
+    setIsFinished(true);
+  };
 
-  // Fisher-Yates shuffle function
+  const cancelSubmit = () => {
+    setShowModal(false);
+  };
+
+  const handleSubmit = () => {
+    const unansweredCount = answers.filter((ans) => ans === null).length;
+
+    if (unansweredCount > 0) {
+      setModalMessage(
+        `You still have ${unansweredCount} unanswered question${
+          unansweredCount > 1 ? 's' : ''
+        }. Are you sure you want to submit?`
+      );
+    } else {
+      setModalMessage('Are you sure you want to submit your answers?');
+    }
+
+    setShowModal(true);
+  };
+
   function shuffleArray(array: Question[]) {
-    const shuffled = [...array]; // Create a copy to avoid mutating the original
+    const shuffled = [...array];
     for (let i = shuffled.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]; // Swap elements
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
     }
     return shuffled;
   }
 
   const handleAnswer = (answer: string) => {
-    const currentQuestion = filteredQuestions[currentIndex];
+    const currentQuestion = shuffledQuestions[currentIndex];
+
+    // Store answer
+    const updatedAnswers = [...answers];
+    updatedAnswers[currentIndex] = answer;
+    setAnswers(updatedAnswers);
+
     if (answer === currentQuestion.answer) {
       setScore(score + 1);
     } else {
-      // If the answer is incorrect, store the wrong answer with explanation
       setIncorrectAnswers([
         ...incorrectAnswers,
         {
@@ -68,51 +96,87 @@ export default function HomePage() {
     }
 
     const next = currentIndex + 1;
-    if (next < filteredQuestions.length) {
+    if (next < shuffledQuestions.length) {
       setCurrentIndex(next);
-    } else {
+    } else if (!updatedAnswers.includes(null)) {
       setIsFinished(true);
     }
   };
 
-  const handleBackToHome = () => {
-    if (window.location.pathname === '/') {
-      window.location.reload(); // Refresh the page
-    } else {
-      navigate('/'); // Navigate to home if not already on it
-    }
-  };
-
   const handleSelectTopic = (topic: string) => {
+    const topicQuestions = questions.filter((q) =>
+      Array.isArray(q.topic) ? q.topic.includes(topic) : q.topic === topic
+    );
+    const shuffled = shuffleArray(topicQuestions);
+    setShuffledQuestions(shuffled);
     setSelectedTopic(topic);
-    setCurrentIndex(0); // Reset to the first question of the selected topic
+    setCurrentIndex(0);
     setScore(0);
     setIsFinished(false);
-    setIncorrectAnswers([]); // Reset incorrect answers when selecting a new topic
+    setAnswers(Array(shuffled.length).fill(null));
+    setIncorrectAnswers([]);
+
+    setSelectedTopic(topic);
+    setCurrentIndex(0);
+    setScore(0);
+    setIsFinished(false);
+    setAnswers(Array(shuffled.length).fill(null));
+    setIncorrectAnswers([]);
+  };
+
+  const handleBackToHome = () => {
+    if (window.location.pathname === '/') {
+      window.location.reload();
+    } else {
+      navigate('/');
+    }
   };
 
   return (
     <Container>
       {!selectedTopic ? (
         <TopicSelector topics={topics} onSelectTopic={handleSelectTopic} />
-      ) : !isFinished && filteredQuestions.length !== 0 ? (
+      ) : !isFinished && shuffledQuestions.length !== 0 ? (
         <ProgressWrapper>
           <ProgressText>
-            Question {currentIndex + 1} of {filteredQuestions.length}
+            Question {currentIndex + 1} of {shuffledQuestions.length}
           </ProgressText>
           <QuestionCard
-            question={filteredQuestions[currentIndex]}
+            question={shuffledQuestions[currentIndex]}
             onAnswer={handleAnswer}
+            selectedAnswer={answers[currentIndex]} // Optional: highlight selected
           />
+          <MenuContainer>
+            <IndexButtonContainer>
+              {shuffledQuestions.map((_, idx) => (
+                <IndexButton
+                  key={idx}
+                  onClick={() => setCurrentIndex(idx)}
+                  answered={answers[idx] !== null}
+                  current={idx === currentIndex}
+                >
+                  {idx + 1}
+                </IndexButton>
+              ))}
+              <SubmitButton onClick={handleSubmit}>Submit Quiz</SubmitButton>
+            </IndexButtonContainer>
+          </MenuContainer>
           <ReturnButton onClick={handleBackToHome} label={'Return to Topics'} />
+          {showModal && (
+            <Modal
+              message={modalMessage}
+              onConfirm={confirmSubmit}
+              onCancel={cancelSubmit}
+            />
+          )}
         </ProgressWrapper>
       ) : (
         <>
           <QuizResult
             score={score}
-            total={filteredQuestions.length}
+            total={shuffledQuestions.length}
             incorrectAnswers={incorrectAnswers}
-          />{' '}
+          />
           <ReturnButton onClick={handleBackToHome} label={'Back to Home'} />
         </>
       )}

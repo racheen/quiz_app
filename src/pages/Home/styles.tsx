@@ -36,3 +36,51 @@ export const ProgressWrapper = styled.div`
     padding: 0px;
   }
 `;
+
+export const IndexButton = styled.button<{
+  answered: boolean;
+  current: boolean;
+}>`
+  padding: 0.5rem 0.75rem;
+  margin: 0.25rem;
+  border-radius: 0.25rem;
+  border: none;
+  background-color: ${({ answered, current, theme }) =>
+    current
+      ? theme.colors.primary
+      : answered
+      ? theme.colors.darkGray
+      : theme.colors.lightGray};
+  color: ${({ current }) => (current ? 'white' : 'black')};
+  font-weight: ${({ current }) => (current ? 'bold' : 'normal')};
+  cursor: pointer;
+  border: 2px solid ${({ theme }) => theme.colors.accent};
+
+  &:hover {
+    opacity: 0.8;
+  }
+`;
+
+export const MenuContainer = styled.div`
+  margin-top: 1rem;
+`;
+
+export const IndexButtonContainer = styled.div`
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+`;
+
+export const SubmitButton = styled.button`
+  padding: 0.5rem 0.75rem;
+  margin: 0.25rem;
+  border-radius: 0.25rem;
+  border: none;
+  background-color: ${({ theme }) => theme.colors.lightGray};
+  cursor: pointer;
+  border: 2px solid ${({ theme }) => theme.colors.accent};
+
+  &:hover {
+    opacity: 0.8;
+  }
+`;
