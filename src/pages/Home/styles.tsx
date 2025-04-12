@@ -31,4 +31,8 @@ export const ProgressWrapper = styled.div`
   gap: 20px; /* Add some space between the question and the progress text */
   width: 100%; /* Ensure it takes full width */
   padding: 20px;
+
+  @media (max-width: 768px) {
+    padding: 0px;
+  }
 `;

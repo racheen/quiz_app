@@ -5,6 +5,7 @@ export const Card = styled.div`
   border-radius: 1rem;
   background-color: ${(props) => props.theme.colors.background};
   box-shadow: ${(props) => props.theme.shadows.card};
+
 `;
 
 export const QuestionText = styled.h2`
