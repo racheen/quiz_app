@@ -98,8 +98,6 @@ export default function HomePage() {
     const next = currentIndex + 1;
     if (next < shuffledQuestions.length) {
       setCurrentIndex(next);
-    } else if (!updatedAnswers.includes(null)) {
-      setIsFinished(true);
     }
   };
 
