@@ -13,11 +13,11 @@ export const TopicButton = styled.button`
   margin: 1rem;
   background-color: ${(props) => props.theme.colors.lightGray};
   color: ${(props) => props.theme.colors.text};
-  border: none;
+  border: 2px solid ${(props) => props.theme.colors.accent};
   border-radius: 0.5rem;
   cursor: pointer;
   font-size: 1rem;
-  transition: background-color 0.3s;
+  transition: background-color 0.2s, border 0.2s;
 
   &:hover {
     background-color: ${(props) => props.theme.colors.darkGray};

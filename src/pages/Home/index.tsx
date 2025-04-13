@@ -98,6 +98,9 @@ export default function HomePage() {
     const next = currentIndex + 1;
     if (next < shuffledQuestions.length) {
       setCurrentIndex(next);
+    } else if (!updatedAnswers.includes(null)) {
+      setModalMessage('Are you sure you want to submit your answers?');
+      setShowModal(true);
     }
   };
 
