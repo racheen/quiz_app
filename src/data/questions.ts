@@ -122,7 +122,7 @@ export const questions: Question[] = [
     options: ['[-1, 1]', '[0, 1]', '[0, ∞ ]', '[-∞ , ∞ ]'],
     answer: '[0, ∞ ]',
     explanation:
-      'The **Rectified Linear Unit (ReLU)** activation function is defined as: $$ f(x) =max(0,x) $$ This means: If x<0, the output is **0**. If x≥0, the output is **x**. Thus, the output **ranges from 0 to infinity**: **[0, ∞]**.',
+      'The **Rectified Linear Unit (ReLU)** activation function is defined as: $ f(x) =max(0,x) $ This means: If x<0, the output is **0**. If x≥0, the output is **x**. Thus, the output **ranges from 0 to infinity**: **[0, ∞]**.',
   },
   {
     id: 10,
@@ -169,7 +169,7 @@ export const questions: Question[] = [
     options: ['4x4', '6x6', '5x5', '3x3'],
     answer: '3x3',
     explanation:
-      'For **valid padding**, the output size is calculated using the formula: $$ \text{Output Size} = left( \frac{\text{Input Size} - \text{Filter Size}}{\text{Stride}} \right) + 1 $$ For this case: $$ \text{Output Size} = left( \frac{7 - 3}{2} \right) + 1 = 3 $$.',
+      'For **valid padding**, the output size is calculated using the formula: $\\text{Output Size} = \\left( \\frac{\\text{Input Size} - \text{Filter Size}}{\text{Stride}} \\right) + 1$ For this case: $\\text{Output Size} = \\left(\\frac{7 - 3}{2}\\right) + 1 = 3$.',
   },
   {
     id: 14,
@@ -179,7 +179,7 @@ export const questions: Question[] = [
     options: ['21x21', '35x35', '22x22', '25x25'],
     answer: '22x22',
     explanation:
-      'With a **filter size of 7x7** and **stride 1**, the output size is calculated using the same formula: $$ \text{Output Size} = left( \frac{\text{Input Size} - \text{Filter Size}}{\text{Stride}} \right) + 1 $$ $$ \text{Output Size} = left( \frac{28 - 7}{1} \right) + 1 = 22 $$.',
+      "With a **filter size of 7x7** and **stride 1**, the output size is calculated using the same formula: $\\text{Output Size} = \\left( \\frac{\\text{Input Size} - \\text{Filter Size}}{\\text{Stride}} \\right) + 1$ $\\text{Output Size} = \\left( \\frac{28 - 7}{1} \\right) + 1 = 22$.",
   },
   {
     id: 15,
@@ -205,7 +205,8 @@ export const questions: Question[] = [
       'add padding such that the convoluted output matrix size should be the same as the input matrix size',
       'if the image size is nxn, add same n pixels on both sides',
     ],
-    answer: 'Position and orientation of the hyperplane',
+    answer:
+      'add padding such that the convoluted output matrix size should be the same as the input matrix size',
     explanation:
       'Same padding means that padding is added to the input image in such a way that the output size of the convolution is the same as the input size. The padding ensures that the filter can slide across the entire image without reducing the spatial dimensions of the input.',
   },
@@ -325,16 +326,16 @@ export const questions: Question[] = [
   {
     id: 25,
     topic: [TopicEnum.AML, TopicEnum.NaiveBayes],
-    question: 'The conditional probability P(A|is',
+    question: 'The conditional probability P(A|B) is',
     options: [
-      '$P(A|= \\frac{P(A∪B)}{P(B)}$',
-      '$P(A|= \\frac{P(A∩B)}{P(B)}$',
-      '$P(A|= \\frac{P(A∩B)}{P(A)}$',
-      '$P(A|= \\frac{P(A∪B)}{P(A)}$',
+      '$P(A|B)= \\frac{P(A∪B)}{P(B)}$',
+      '$P(A|B)= \\frac{P(A∩B)}{P(B)}$',
+      '$P(A|B)= \\frac{P(A∩B)}{P(A)}$',
+      '$P(A|B)= \\frac{P(A∪B)}{P(A)}$',
     ],
-    answer: '$P(A|= \\frac{P(A∩B)}{P(B)}$',
+    answer: '$P(A|B)= \\frac{P(A∩B)}{P(B)}$',
     explanation:
-      'Conditional probability is defined as the probability of event A given that event B has occurred. It is calculated using the formula: \n\n$$P(A|= \\frac{P(A∩B)}{P(B)}$$',
+      'Conditional probability is defined as the probability of event A given that event B has occurred. It is calculated using the formula: \n\n$P(A|B)= \\frac{P(A∩B)}{P(B)}$',
   },
   {
     id: 26,
@@ -1343,5 +1344,118 @@ export const questions: Question[] = [
     answer: 'Random Forest',
     explanation:
       'Random Forest is a machine learning algorithm, not a data preprocessing technique. Preprocessing techniques include transformation, integration, and reduction.',
+  },
+  {
+    id: 97,
+    topic: [TopicEnum.AML, TopicEnum.TimeSeriesRNN],
+    question:
+      'Which of the following is NOT a component of time series decomposition?',
+    options: ['Trend', 'Seasonality', 'Residual', 'Variance'],
+    answer: 'Variance',
+    explanation:
+      'The three main components of time series decomposition are trend, seasonality, and residuals. Variance is a statistical property, not a decomposition component.',
+  },
+  {
+    id: 98,
+    topic: [TopicEnum.AML, TopicEnum.TimeSeriesRNN],
+    question: 'What does the seasonal component in a time series represent?',
+    options: [
+      'The overall direction in the data',
+      'Random fluctuations',
+      'Patterns that repeat at regular intervals',
+      'Sudden spikes due to anomalies',
+    ],
+    answer: 'Patterns that repeat at regular intervals',
+    explanation:
+      'The seasonal component captures periodic patterns that occur at regular intervals such as months or quarters in a time series.',
+  },
+  {
+    id: 99,
+    topic: [TopicEnum.AML, TopicEnum.TimeSeriesRNN],
+    question:
+      'What is the primary purpose of the TimeseriesGenerator in Keras?',
+    options: [
+      'Visualizing time series data',
+      'Cleaning noisy time series data',
+      'Preparing time series data for training',
+      'Scaling time series data',
+    ],
+    answer: 'Preparing time series data for training',
+    explanation:
+      "Keras' TimeseriesGenerator is used to efficiently prepare batches of sequential data for training models like RNNs.",
+  },
+  {
+    id: 100,
+    topic: [TopicEnum.AML, TopicEnum.TimeSeriesRNN],
+    question:
+      'Which real-world application is NOT a typical example of sequence data usage?',
+    options: [
+      'Speech recognition',
+      'DNA sequence analysis',
+      'Image classification',
+      'Machine translation',
+    ],
+    answer: 'Image classification',
+    explanation:
+      'Image classification is generally a static input task, while sequence data tasks involve inputs and/or outputs that are ordered or time-dependent.',
+  },
+  {
+    id: 101,
+    topic: [TopicEnum.AML, TopicEnum.TimeSeriesRNN],
+    question: 'What makes RNNs particularly suitable for time series data?',
+    options: [
+      'They use attention mechanisms',
+      'They operate in parallel across time steps',
+      'They retain memory of previous steps in the sequence',
+      'They require less data for training',
+    ],
+    answer: 'They retain memory of previous steps in the sequence',
+    explanation:
+      'RNNs maintain a hidden state that carries information from previous time steps, making them effective for sequential data like time series.',
+  },
+  {
+    id: 102,
+    topic: [TopicEnum.AML, TopicEnum.TimeSeriesRNN],
+    question:
+      'Which neural network architecture handles long-term dependencies better than standard RNNs?',
+    options: [
+      'Feed-forward network',
+      'Sequential dense layers',
+      'Basic RNN',
+      'LSTM',
+    ],
+    answer: 'LSTM',
+    explanation:
+      'LSTMs (Long Short-Term Memory) are designed to address the vanishing gradient problem in standard RNNs and can maintain long-term dependencies.',
+  },
+  {
+    id: 103,
+    topic: [TopicEnum.AML, TopicEnum.TimeSeriesRNN],
+    question:
+      'Which of the following is an example of a Many-to-One RNN model?',
+    options: [
+      'Image captioning',
+      'Language translation',
+      'Speech recognition',
+      'Sentiment analysis',
+    ],
+    answer: 'Sentiment analysis',
+    explanation:
+      'Sentiment analysis processes a sequence of words (many inputs) and produces a single sentiment label (one output), fitting the Many-to-One structure.',
+  },
+  {
+    id: 104,
+    topic: [TopicEnum.AML, TopicEnum.TimeSeriesRNN],
+    question:
+      'What common problem do RNNs face when processing long sequences?',
+    options: [
+      'They can only predict categorical outputs',
+      'They cannot be trained on batches',
+      'They lose memory of earlier inputs',
+      'They always overfit',
+    ],
+    answer: 'They lose memory of earlier inputs',
+    explanation:
+      'RNNs suffer from vanishing gradients, which cause them to "forget" long-term information. This is why LSTM and GRU were developed.',
   },
 ];
