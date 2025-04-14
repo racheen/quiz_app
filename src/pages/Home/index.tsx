@@ -95,12 +95,16 @@ export default function HomePage() {
       ]);
     }
 
+    if (!updatedAnswers.includes(null)) {
+      setModalMessage('Are you sure you want to submit your answers?');
+      setShowModal(true);
+    }
+  };
+
+  const handleNext = () => {
     const next = currentIndex + 1;
     if (next < shuffledQuestions.length) {
       setCurrentIndex(next);
-    } else if (!updatedAnswers.includes(null)) {
-      setModalMessage('Are you sure you want to submit your answers?');
-      setShowModal(true);
     }
   };
 
@@ -147,6 +151,11 @@ export default function HomePage() {
             onAnswer={handleAnswer}
             selectedAnswer={answers[currentIndex]} // Optional: highlight selected
           />
+          {answers[currentIndex] !== null && (
+            <SubmitButton key='next' onClick={handleNext}>
+              Next
+            </SubmitButton>
+          )}
           <MenuContainer>
             <IndexButtonContainer>
               {shuffledQuestions.map((_, idx) => (

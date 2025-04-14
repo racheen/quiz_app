@@ -15,26 +15,41 @@ export const QuestionText = styled.h2`
   color: ${(props) => props.theme.colors.text};
 `;
 
-export const OptionButton = styled.button<{ selected?: boolean }>`
+export const OptionButton = styled.button<{
+  selected?: boolean | undefined;
+  isCorrect?: boolean | undefined;
+  isIncorrect?: boolean | undefined;
+}>`
   display: block;
   width: 100%;
   text-align: left;
   padding: 0.75rem 1rem;
   margin-bottom: 0.5rem;
-  background-color: ${({ selected, theme }) =>
-    selected ? theme.colors.darkGray : theme.colors.lightGray};
-  border: 2px solid
-    ${({ selected, theme }) =>
-      selected ? theme.colors.lightGray : theme.colors.accent};
-  color: ${({ selected, theme }) => (selected ? theme.colors.text : 'inherit')};
   border-radius: 0.5rem;
   font-size: ${({ theme }) => theme.fontSizes.normal};
   cursor: pointer;
   transition: background-color 0.2s, border 0.2s;
 
+  background-color: ${({ theme, selected, isCorrect, isIncorrect }) =>
+    isCorrect
+      ? 'lightgreen'
+      : isIncorrect
+      ? 'lightcoral'
+      : theme.colors.lightGray};
+
+  border: 2px solid
+    ${({ theme, selected }) =>
+      selected ? theme.colors.lightGray : theme.colors.accent};
+
+  color: ${({ selected, theme }) => (selected ? theme.colors.text : 'inherit')};
+
   &:hover {
-    background-color: ${({ selected, theme }) =>
-      selected ? theme.colors.accent : theme.colors.darkGray};
+    background-color: ${({ theme, selected, isCorrect, isIncorrect }) =>
+      isCorrect
+        ? 'lightgreen'
+        : isIncorrect
+        ? 'lightcoral'
+        : theme.colors.lightGray};
   }
 
   &:disabled {

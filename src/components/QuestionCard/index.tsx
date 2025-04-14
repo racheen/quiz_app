@@ -21,15 +21,29 @@ const QuestionCard: React.FC<Props> = ({
       <QuestionText>
         <DynamicText text={question.question} />
       </QuestionText>
-      {question.options.map((option, index) => (
-        <OptionButton
-          key={index}
-          onClick={() => onAnswer(option)}
-          selected={selectedAnswer === option}
-        >
-          <DynamicText text={option} />
-        </OptionButton>
-      ))}
+      {question.options.map((option, index) => {
+        const isSelected = selectedAnswer === option;
+        const isCorrect = selectedAnswer !== null && option === question.answer;
+        const isIncorrect = isSelected && option !== question.answer;
+
+        return (
+          <OptionButton
+            key={index}
+            onClick={() => onAnswer(option)}
+            disabled={selectedAnswer !== null}
+            isCorrect={Boolean(isCorrect)}
+            isIncorrect={Boolean(isIncorrect)}
+          >
+            <DynamicText text={option} />
+          </OptionButton>
+        );
+      })}
+      {selectedAnswer && selectedAnswer !== question.answer && (
+        <div style={{ marginTop: '1rem', color: '#e63946' }}>
+          <strong>Explanation:</strong>{' '}
+          <DynamicText text={question.explanation} />
+        </div>
+      )}
     </Card>
   );
 };
