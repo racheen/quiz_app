@@ -69,6 +69,31 @@ export const IndexButtonContainer = styled.div`
   margin-top: 1rem;
   display: flex;
   flex-wrap: wrap;
+
+  @media (max-width: 768px) {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 0;
+    gap: 0.5rem;
+    width: 300px;
+
+    /* Optional: enhance mobile scroll UX */
+    scrollbar-width: thin;
+    scrollbar-color: #ccc transparent;
+
+    &::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #ccc;
+      border-radius: 3px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+  }
 `;
 
 export const SubmitButton = styled.button`
