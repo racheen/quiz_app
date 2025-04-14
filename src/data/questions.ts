@@ -12,6 +12,8 @@ export enum TopicEnum {
   AML = 'Advanced Machine Leraning',
   ClassifierFusion = 'Classifier Fusion',
   ScikitLearn = 'Scikit Learn',
+  MV = 'Machine Vision',
+  PyTorch = 'PyTorch'
 }
 
 export const questions: Question[] = [
@@ -1720,4 +1722,134 @@ export const questions: Question[] = [
     explanation:
       'OCSVM is commonly used for outlier or anomaly detection where the model is trained only on normal instances to identify unusual patterns.',
   },
+  {
+    id: 125,
+    topic: [TopicEnum.MV, TopicEnum.PyTorch],
+    question: 'What is the primary advantage of PyTorch’s dynamic computation graph?',
+    options: [
+      'It allows models to be exported to other platforms easily',
+      'It enables on-the-fly graph modifications during runtime',
+      'It reduces GPU memory usage automatically',
+      'It ensures backward compatibility with Lua code'
+    ],
+    answer: 'It enables on-the-fly graph modifications during runtime',
+    explanation: 'Dynamic computation graphs allow you to define and modify the computational graph at runtime, which makes debugging and experimentation easier and more flexible.'
+  },
+  {
+    id: 126,
+    topic: [TopicEnum.MV, TopicEnum.PyTorch],
+    question: 'Which of the following PyTorch components is responsible for automatic gradient computation?',
+    options: [
+      'Tensor',
+      'DataLoader',
+      'Autograd',
+      'Optimizer'
+    ],
+    answer: 'Autograd',
+    explanation: 'Autograd is PyTorch’s automatic differentiation engine that tracks operations on tensors and automatically computes gradients for backward propagation.'
+  },
+  {
+    id: 127,
+    topic: [TopicEnum.MV, TopicEnum.PyTorch],
+    question: 'In PyTorch, what is the main purpose of the `DataLoader` class?',
+    options: [
+      'To create neural network layers',
+      'To apply activation functions',
+      'To load and batch data efficiently during training',
+      'To optimize model parameters'
+    ],
+    answer: 'To load and batch data efficiently during training',
+    explanation: 'The DataLoader class helps load data in batches, shuffle data, and apply multiprocessing for faster and more efficient data pipeline during training.'
+  },
+  {
+    id: 128,
+    topic: [TopicEnum.MV, TopicEnum.PyTorch],
+    question: 'Which PyTorch module contains pre-built layers and functions for building neural networks?',
+    options: [
+      'torch.optim',
+      'torch.nn',
+      'torch.utils',
+      'torch.cuda'
+    ],
+    answer: 'torch.nn',
+    explanation: 'torch.nn is the core module in PyTorch for building neural networks. It includes commonly used layers like Linear, Conv2d, activation functions, and more.'
+  },
+  {
+    id: 129,
+    topic: [TopicEnum.MV, TopicEnum.PyTorch],
+    question: 'Which optimizer in PyTorch is typically preferred for its adaptive learning rate features?',
+    options: [
+      'SGD',
+      'Adam',
+      'RMSprop',
+      'Nesterov'
+    ],
+    answer: 'Adam',
+    explanation: 'Adam combines the advantages of both RMSprop and SGD with momentum. It adapts learning rates based on the first and second moments of gradients, making it efficient for most applications.'
+  },
+  {
+    id: 130,
+    topic: [TopicEnum.MV, TopicEnum.PyTorch],
+    question: 'What is the function of the `forward()` method in a PyTorch model?',
+    options: [
+      'It initializes the model’s parameters',
+      'It performs a backward pass for gradient calculation',
+      'It defines how input data flows through the network layers',
+      'It shuffles the training data'
+    ],
+    answer: 'It defines how input data flows through the network layers',
+    explanation: 'The forward() method in a subclass of `nn.Module` defines the computation performed at every call and determines how the data flows through the network.'
+  },
+  {
+    id: 131,
+    topic: [TopicEnum.MV, TopicEnum.PyTorch],
+    question: 'What does `requires_grad=True` do when assigned to a tensor in PyTorch?',
+    options: [
+      'Prevents the tensor from being modified',
+      'Marks the tensor as a constant',
+      'Enables PyTorch to track all operations on the tensor for autograd',
+      'Optimizes the tensor using torch.optim'
+    ],
+    answer: 'Enables PyTorch to track all operations on the tensor for autograd',
+    explanation: 'Setting `requires_grad=True` lets PyTorch keep track of all operations on the tensor so that it can automatically compute gradients during backpropagation.'
+  },
+  {
+    id: 132,
+    topic: [TopicEnum.MV, TopicEnum.PyTorch],
+    question: 'Which method is used to move a PyTorch tensor to the GPU?',
+    options: [
+      '.to(cpu)',
+      '.cuda()',
+      '.numpy()',
+      '.device("gpu")'
+    ],
+    answer: '.cuda()',
+    explanation: 'Calling `.cuda()` on a tensor moves it to the default GPU device for accelerated computation.'
+  },
+  {
+    id: 133,
+    topic: [TopicEnum.MV, TopicEnum.PyTorch],
+    question: 'What is `TorchScript` used for in PyTorch?',
+    options: [
+      'To visualize model training metrics',
+      'To write models using C++ only',
+      'To optimize and serialize models for production deployment',
+      'To debug Python scripts using graphs'
+    ],
+    answer: 'To optimize and serialize models for production deployment',
+    explanation: 'TorchScript is an intermediate representation of a PyTorch model that can be optimized and run independently from Python, useful for deployment in production environments.'
+  },
+  {
+    id: 134,
+    topic: [TopicEnum.MV, TopicEnum.PyTorch],
+    question: 'Which of the following best describes the `nn.Module` class in PyTorch?',
+    options: [
+      'A utility class for loading data',
+      'A base class for all neural network models',
+      'A special type of tensor with gradients',
+      'A module that contains GPU drivers'
+    ],
+    answer: 'A base class for all neural network models',
+    explanation: '`nn.Module` is the base class for all neural network models in PyTorch. It encapsulates parameters, layers, and the forward pass logic.'
+  }
 ];
