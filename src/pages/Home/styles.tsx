@@ -36,25 +36,23 @@ export const ProgressWrapper = styled.div`
     padding: 0px;
   }
 `;
-
 export const IndexButton = styled.button<{
   answered: boolean;
   current: boolean;
+  isCorrect: boolean;
 }>`
   padding: 0.5rem 0.75rem;
   margin: 0.25rem;
   border-radius: 0.25rem;
-  border: none;
-  background-color: ${({ answered, current, theme }) =>
-    current
-      ? theme.colors.primary
-      : answered
-      ? theme.colors.darkGray
-      : theme.colors.lightGray};
-  color: ${({ current }) => (current ? 'white' : 'black')};
-  font-weight: ${({ current }) => (current ? 'bold' : 'normal')};
-  cursor: pointer;
   border: 2px solid ${({ theme }) => theme.colors.accent};
+  cursor: pointer;
+  font-weight: ${({ current }) => (current ? 'bold' : 'normal')};
+  color: ${({ current }) => (current ? 'white' : 'black')};
+  background-color: ${({ answered, current, isCorrect, theme }) => {
+    if (current) return theme.colors.primary;
+    if (!answered) return theme.colors.lightGray;
+    return isCorrect ? theme.colors.accent : theme.colors.lightRed;
+  }};
 
   &:hover {
     opacity: 0.8;

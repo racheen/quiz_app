@@ -58,7 +58,7 @@ export default function HomePage() {
         }. Are you sure you want to submit?`
       );
     } else {
-      setModalMessage('Are you sure you want to submit your answers?');
+      setModalMessage('You are done with the quiz, do you want to view summary your answers?');
     }
 
     setShowModal(true);
@@ -164,6 +164,7 @@ export default function HomePage() {
                   onClick={() => setCurrentIndex(idx)}
                   answered={answers[idx] !== null}
                   current={idx === currentIndex}
+                  isCorrect={answers[idx] !== null ? answers[idx] === shuffledQuestions[idx].answer : false}
                 >
                   {idx + 1}
                 </IndexButton>
