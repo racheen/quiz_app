@@ -179,7 +179,7 @@ export const questions: Question[] = [
     options: ['21x21', '35x35', '22x22', '25x25'],
     answer: '22x22',
     explanation:
-      "With a **filter size of 7x7** and **stride 1**, the output size is calculated using the same formula: $\\text{Output Size} = \\left( \\frac{\\text{Input Size} - \\text{Filter Size}}{\\text{Stride}} \\right) + 1$ $\\text{Output Size} = \\left( \\frac{28 - 7}{1} \\right) + 1 = 22$.",
+      'With a **filter size of 7x7** and **stride 1**, the output size is calculated using the same formula: $\\text{Output Size} = \\left( \\frac{\\text{Input Size} - \\text{Filter Size}}{\\text{Stride}} \\right) + 1$ $\\text{Output Size} = \\left( \\frac{28 - 7}{1} \\right) + 1 = 22$.',
   },
   {
     id: 15,
@@ -287,13 +287,13 @@ export const questions: Question[] = [
       'If noise dominates in your dataset, which technique is the best to reduce the dimensionality of this dataset?',
     options: [
       'both are equivalent',
-      'PCA',
+      'LDA',
       'Cannot tell, it depends on the attributes',
       'LDA',
     ],
-    answer: 'PCA',
+    answer: 'LDA',
     explanation:
-      'PCA is an unsupervised technique that focuses on directions of maximum variance. When noise dominates the dataset, PCA helps by reducing dimensions and removing components associated with low variance (often noise), improving signal clarity.',
+      'LDA (Linear Discriminant Analysis) is a supervised dimensionality reduction technique that maximizes class separability. When labels are available and the dataset contains noise, LDA often performs better than PCA because it focuses on preserving class-discriminative information rather than just maximizing variance like PCA.',
   },
   {
     id: 23,
@@ -1457,5 +1457,267 @@ export const questions: Question[] = [
     answer: 'They lose memory of earlier inputs',
     explanation:
       'RNNs suffer from vanishing gradients, which cause them to "forget" long-term information. This is why LSTM and GRU were developed.',
+  },
+  {
+    id: 105,
+    topic: [TopicEnum.AML, TopicEnum.Visualizations],
+    question: 'In Power BI, which of the following can be used to filter data?',
+    options: ['Treemap', 'Funnel', 'Slicer', 'Gauge'],
+    answer: 'Slicer',
+    explanation:
+      'Slicers are specifically designed in Power BI to filter data interactively on reports. Other visuals like Treemap, Funnel, and Gauge are used for displaying data, not filtering.',
+  },
+  {
+    id: 106,
+    topic: [TopicEnum.AML, TopicEnum.ScikitLearn],
+    question:
+      'Which loss function can be used with a model that is to predict the house price based on 10 different attributes?',
+    options: [
+      'MSE',
+      'Binary Cross Entropy',
+      'Hinge Loss',
+      'Categorical Cross Entropy',
+    ],
+    answer: 'MSE',
+    explanation:
+      'For regression tasks like predicting house prices, Mean Squared Error (MSE) is commonly used because it measures the average squared difference between predicted and actual values.',
+  },
+  {
+    id: 107,
+    topic: [TopicEnum.AML, TopicEnum.ScikitLearn],
+    question:
+      'Which one of the following represent the number of times the algorithm scans the entire dataset?',
+    options: ['Epoch', 'Batch', 'Iteration or Epoch', 'Iteration'],
+    answer: 'Epoch',
+    explanation:
+      'An epoch is defined as one full pass through the entire training dataset. Iterations refer to the number of batches processed, and a batch is a subset of the training data.',
+  },
+  {
+    id: 108,
+    topic: [TopicEnum.AML, TopicEnum.ScikitLearn],
+    question:
+      'There is a dataset with 500 images, and the images are of Cat, Dog, Horse, Mouse, Bat. Which loss function is the best to use in CNN',
+    options: [
+      'Categorical Cross Entropy',
+      'Binary Cross Entropy',
+      'Sparse Categorical Cross Entropy',
+      'Hinge Loss',
+    ],
+    answer: 'Categorical Cross Entropy',
+    explanation:
+      'Categorical Cross Entropy is used when dealing with multi-class classification problems where the labels are one-hot encoded. It is ideal for CNNs working with multiple distinct categories like animal types.',
+  },
+  {
+    id: 109,
+    topic: [TopicEnum.AML, TopicEnum.ScikitLearn],
+    question: 'Which loss function can be used for SVM?',
+    options: ['Hinge Loss', 'Cross Entropy', 'MSE', 'MAE'],
+    answer: 'Hinge Loss',
+    explanation:
+      'Support Vector Machines (SVM) typically use the Hinge Loss function, which helps to maximize the margin between different classes.',
+  },
+  {
+    id: 110,
+    topic: [TopicEnum.AML, TopicEnum.ClassifierFusion],
+    question:
+      'You have 20 instances in your dataset. Which approach is good for ensemble learning?',
+    options: ['Any of these', 'Bagging', 'Random Forest', 'Stacking'],
+    answer: 'Stacking',
+    explanation:
+      'With a small dataset (e.g., 20 instances), stacking can be more effective as it combines predictions from multiple models, while methods like bagging and random forest often need larger datasets to perform well.',
+  },
+  {
+    id: 111,
+    topic: [TopicEnum.AML, TopicEnum.Visualizations],
+    question:
+      'We have a Profit column in our dataset. We can create Total Profit using:',
+    options: ['New Column', 'New Attribute', 'New Measure', 'New Category'],
+    answer: 'New Measure',
+    explanation:
+      'In data analysis tools like Power BI, a "New Measure" is used to create aggregations like Total Profit, especially when it needs to be calculated dynamically based on filters.',
+  },
+  {
+    id: 112,
+    topic: [TopicEnum.AML, TopicEnum.ClassifierFusion],
+    question:
+      'A company is interested in building a fraud detection model. Currently, the Data Scientist does not have a sufficient amount of information due to the low number of fraud cases. Which method is MOST likely to detect the GREATEST number of valid fraud cases?',
+    options: [
+      'Oversampling using bootstrapping',
+      'Undersampling',
+      'Oversampling using SMOTE',
+      'Class weight adjustment',
+    ],
+    answer: 'Oversampling using SMOTE',
+    explanation:
+      'SMOTE (Synthetic Minority Over-sampling Technique) generates synthetic examples for the minority class, helping to improve recall and detect more fraud cases in imbalanced datasets.',
+  },
+  {
+    id: 113,
+    topic: [TopicEnum.AML, TopicEnum.ClassifierFusion],
+    question:
+      'You have a dataset with 80000 instances. Number of Epochs is set as 3. How many iterations will be there?',
+    options: ['1875', '2500', '833', '7500'],
+    answer: '2500',
+    explanation:
+      "Iterations = Number of Batches = (Total Instances / Batch Size) × Epochs. Assuming a default batch size of 32: 80000 / 32 = 2500 batches per epoch × 3 epochs = 7500 iterations. But if the answer is 2500, it's most likely referring to per-epoch iterations.",
+  },
+  {
+    id: 114,
+    topic: [TopicEnum.AML, TopicEnum.Visualizations],
+    question: 'Which is not a visual that is available in PowerBI?',
+    options: ['Stacked Bar Chart', 'Power KPI Chart', 'Donut Chart', 'Map'],
+    answer: 'Power KPI Chart',
+    explanation:
+      'Power KPI Chart is not a default visual in Power BI. It can be imported as a custom visual, but it is not built-in like Stacked Bar Chart or Donut Chart.',
+  },
+  {
+    id: 115,
+    topic: [TopicEnum.AML, TopicEnum.Clustering],
+    question:
+      'OCSVM developed by Tax & Duin uses the concept of',
+    options: [
+      'hyperplane',
+      'hypersphere and a then a hyperplane within the hypersphere to separate instances by applying weights',
+      'hypersphere',
+      'hyperplane and a then hypersphere in the already separate region with the hyperplane',
+    ],
+    answer: 'hypersphere',
+    explanation:
+      'The original One-Class SVM by Tax & Duin is based on the concept of enclosing data in a minimum volume hypersphere to detect outliers or novelty instances.',
+  },
+  {
+    id: 116,
+    topic: [TopicEnum.AML, TopicEnum.Clustering],
+    question:
+      'OCSVM creates a hyperplane between',
+    options: [
+      'instances and the origin',
+      'class 1 and outliers of class 2',
+      'class 1 and class 2',
+      'class 2 and outliers of class 1',
+    ],
+    answer: 'instances and the origin',
+    explanation:
+      'In OCSVM, the goal is to find a decision boundary that separates the data from the origin, especially in high-dimensional feature space.',
+  },
+  {
+    id: 117,
+    topic: [TopicEnum.AML, TopicEnum.ClassifierFusion],
+    question:
+      'Which method uses weak stable classifiers?',
+    options: [
+      'Bagging',
+      'Majority Vote',
+      'All of these',
+      'Boosting',
+    ],
+    answer: 'Boosting',
+    explanation:
+      'Boosting uses weak learners (often decision stumps) and focuses on improving them sequentially to form a strong ensemble classifier.',
+  },
+  {
+    id: 118,
+    topic: [TopicEnum.AML, TopicEnum.ClassifierFusion],
+    question:
+      'Bagging is',
+    options: [
+      'soosted Assomerave grouping',
+      'Bootstrap Aggregating',
+      'Balanced Aggregating',
+      'Bound Agglomerative grouping',
+    ],
+    answer: 'Bootstrap Aggregating',
+    explanation:
+      'Bagging stands for Bootstrap Aggregating, a technique to reduce variance by training on multiple bootstrapped subsets and averaging the predictions.',
+  },
+  {
+    id: 119,
+    topic: [TopicEnum.AML, TopicEnum.ClassifierFusion],
+    question:
+      'Which of the following method reduces the effect of high variance in data?',
+    options: [
+      'Boosting',
+      'Majority vote',
+      'Bagging',
+      'All of these',
+    ],
+    answer: 'Bagging',
+    explanation:
+      'Bagging helps reduce variance by training each model on different subsets of data and averaging the results, thereby reducing overfitting.',
+  },
+  {
+    id: 120,
+    topic: [TopicEnum.AML, TopicEnum.ClassifierFusion],
+    question:
+      'Random Forest uses',
+    options: [
+      'Bagging',
+      'Boosting',
+      'Both of these',
+      'Any of these',
+    ],
+    answer: 'Bagging',
+    explanation:
+      'Random Forest is an ensemble learning method that builds multiple decision trees using the Bagging technique.',
+  },
+  {
+    id: 121,
+    topic: [TopicEnum.AML, TopicEnum.Clustering],
+    question:
+      'OCSVM that creates a hyperplane',
+    options: [
+      'which is circular in shape',
+      'needs an upper bound on the number of outliers',
+      'minimizes the volume that is to the right of the hyperplane',
+      'uses soft margin for smoothness',
+    ],
+    answer: 'needs an upper bound on the number of outliers',
+    explanation:
+      'OCSVM requires an upper bound (nu parameter) to control the fraction of outliers and the number of support vectors.',
+  },
+  {
+    id: 122,
+    topic: [TopicEnum.AML],
+    question:
+      'The harmonic mean of precision and recall is',
+    options: [
+      'F1 score',
+      'Accuracy',
+      'Specificity',
+      'Focal Loss',
+    ],
+    answer: 'F1 score',
+    explanation:
+      'F1 score is the harmonic mean of precision and recall, providing a balance between the two in evaluating classification models.',
+  },
+  {
+    id: 123,
+    topic: [TopicEnum.AML],
+    question:
+      'SMOTE is',
+    options: [
+      'Sampled Majority Oversampling Technique',
+      'Synthetic Majority Oversampling Technique',
+      'Synthetic Minority Oversampling Technique',
+      'Sampled Minority Oversampling Technique',
+    ],
+    answer: 'Synthetic Minority Oversampling Technique',
+    explanation:
+      'SMOTE stands for Synthetic Minority Oversampling Technique. It generates synthetic samples for the minority class to balance the dataset.',
+  },
+  {
+    id: 124,
+    topic: [TopicEnum.AML, TopicEnum.Clustering],
+    question:
+      'OCSVM can be used for',
+    options: [
+      'Outlier Detection',
+      'Regression',
+      'Classification',
+      'All of these',
+    ],
+    answer: 'Outlier Detection',
+    explanation:
+      'OCSVM is commonly used for outlier or anomaly detection where the model is trained only on normal instances to identify unusual patterns.',
   },
 ];
