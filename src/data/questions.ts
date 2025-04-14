@@ -289,7 +289,7 @@ export const questions: Question[] = [
       'both are equivalent',
       'LDA',
       'Cannot tell, it depends on the attributes',
-      'LDA',
+      'PCA',
     ],
     answer: 'LDA',
     explanation:
