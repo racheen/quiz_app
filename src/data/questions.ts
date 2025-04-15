@@ -24,13 +24,16 @@ export enum TopicEnum {
   DLCNN = 'Deep Learning for Image Classification',
   RL = 'Reinforcement Learning',
 }
+
 export const MainTopic = {
   MV: TopicEnum.MV,
   AML: TopicEnum.AML,
   RL: TopicEnum.RL,
 } as const;
 
+// eslint-disable-next-line @typescript-eslint/no-redeclare
 export type MainTopic = typeof MainTopic[keyof typeof MainTopic];
+
 
 export const questions: Question[] = [
   {
