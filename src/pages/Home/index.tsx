@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { questions, TopicEnum } from '../../data/questions';
+import { MainTopic, questions } from '../../data/questions';
 import QuestionCard from '../../components/QuestionCard';
 import QuizResult from '../../components/QuizResult';
 import TopicSelector from '../../components/TopicSelector';
@@ -16,6 +16,7 @@ import {
 import { ReturnButton } from '../../components/ReturnButton';
 import { Question } from '../../types/question';
 import Modal from '../../components/Modal';
+import { topicHierarchy } from '../../data/TopicMap';
 
 export default function HomePage() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -34,10 +35,13 @@ export default function HomePage() {
   const [shuffledQuestions, setShuffledQuestions] = useState<Question[]>([]);
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
+  const [selectedMainTopic, setSelectedMainTopic] = useState<MainTopic | null>(
+    null
+  );
 
   const navigate = useNavigate();
 
-  const topics = Object.values(TopicEnum);
+  const mainTopics = Object.values(MainTopic);
 
   const confirmSubmit = () => {
     setShowModal(false);
@@ -58,7 +62,9 @@ export default function HomePage() {
         }. Are you sure you want to submit?`
       );
     } else {
-      setModalMessage('You are done with the quiz, do you want to view summary your answers?');
+      setModalMessage(
+        'You are done with the quiz, do you want to view summary your answers?'
+      );
     }
 
     setShowModal(true);
@@ -130,6 +136,8 @@ export default function HomePage() {
   };
 
   const handleBackToHome = () => {
+    setSelectedMainTopic(null);
+    setSelectedTopic(null);
     if (window.location.pathname === '/') {
       window.location.reload();
     } else {
@@ -137,10 +145,34 @@ export default function HomePage() {
     }
   };
 
+  const isMainTopic = (value: string): boolean => {
+    return Object.values(MainTopic).includes(value as unknown as MainTopic);
+  };
+
   return (
     <Container>
-      {!selectedTopic ? (
-        <TopicSelector topics={topics} onSelectTopic={handleSelectTopic} />
+      {!selectedMainTopic ? (
+        <TopicSelector
+          topics={mainTopics}
+          onSelectTopic={(main) => {
+            if (isMainTopic(main)) {
+              setSelectedMainTopic(main as unknown as MainTopic);
+            } else {
+              console.warn(`Invalid main topic selected: ${main}`);
+            }
+          }}
+        />
+      ) : !selectedTopic ? (
+        <>
+          <ReturnButton
+            onClick={() => setSelectedMainTopic(null)}
+            label='← Back to Main Topics'
+          />
+          <TopicSelector
+            topics={topicHierarchy[selectedMainTopic]}
+            onSelectTopic={handleSelectTopic}
+          />
+        </>
       ) : !isFinished && shuffledQuestions.length !== 0 ? (
         <ProgressWrapper>
           <ProgressText>
@@ -164,7 +196,11 @@ export default function HomePage() {
                   onClick={() => setCurrentIndex(idx)}
                   answered={answers[idx] !== null}
                   current={idx === currentIndex}
-                  isCorrect={answers[idx] !== null ? answers[idx] === shuffledQuestions[idx].answer : false}
+                  isCorrect={
+                    answers[idx] !== null
+                      ? answers[idx] === shuffledQuestions[idx].answer
+                      : false
+                  }
                 >
                   {idx + 1}
                 </IndexButton>
