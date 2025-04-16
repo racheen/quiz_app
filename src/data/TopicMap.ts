@@ -11,6 +11,7 @@ export const topicHierarchy: Record<MainTopic, TopicEnum[]> = {
     TopicEnum.ObjectDetection,
     TopicEnum.ObjectTracking,
     TopicEnum.SensorFusion,
+    TopicEnum.PyTorch,
   ],
   [MainTopic.AML]: [
     TopicEnum.DataPreprocessing,
@@ -23,7 +24,12 @@ export const topicHierarchy: Record<MainTopic, TopicEnum[]> = {
     TopicEnum.Visualizations,
     TopicEnum.ClassifierFusion,
     TopicEnum.ScikitLearn,
-    TopicEnum.PyTorch,
   ],
-  [MainTopic.RL]: [],
+  [MainTopic.RL]: [
+    TopicEnum.RlMd,
+    TopicEnum.DpMc,
+    TopicEnum.StableBaselines,
+    TopicEnum.Gymnasium,
+    TopicEnum.ValueApprox,
+  ],
 };
