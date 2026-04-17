@@ -142,6 +142,18 @@ Upload one quiz JSON at a time.
       ],
       "answerIndexes": [0, 1],
       "explanation": "Classification and regression use labeled data, while clustering and dimensionality reduction do not."
+    },
+    {
+      "type": "ordering",
+      "prompt": "Put the machine learning workflow in order.",
+      "options": [
+        "Train the model",
+        "Collect data",
+        "Evaluate the model",
+        "Clean the data"
+      ],
+      "answerIndexes": [1, 3, 0, 2],
+      "explanation": "A common flow is collect data, clean it, train the model, then evaluate it."
     }
   ]
 }

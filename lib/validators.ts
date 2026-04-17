@@ -22,6 +22,14 @@ const selectAllQuestionSchema = z.object({
   explanation: z.string().optional()
 });
 
+const orderingQuestionSchema = z.object({
+  type: z.literal('ordering'),
+  prompt: z.string().min(5),
+  options: z.array(z.string().min(1)).min(2),
+  answerIndexes: z.array(z.number().int().min(0)).min(2),
+  explanation: z.string().optional()
+});
+
 const fillBlankQuestionSchema = z.object({
   type: z.literal('fill_blank'),
   prompt: z.string().min(5),
@@ -32,6 +40,7 @@ const fillBlankQuestionSchema = z.object({
 export const quizQuestionSchema = z.discriminatedUnion('type', [
   multipleChoiceQuestionSchema,
   selectAllQuestionSchema,
+  orderingQuestionSchema,
   fillBlankQuestionSchema
 ]);
 

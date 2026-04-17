@@ -27,6 +27,13 @@ const exampleJson = {
       options: ['Classification', 'Regression', 'Clustering', 'Dimensionality reduction'],
       answerIndexes: [0, 1],
       explanation: 'Classification and regression use labeled data.'
+    },
+    {
+      type: 'ordering',
+      prompt: 'Put the machine learning workflow in order.',
+      options: ['Train the model', 'Collect data', 'Evaluate the model', 'Clean the data'],
+      answerIndexes: [1, 3, 0, 2],
+      explanation: 'A common flow is collect data, clean it, train the model, then evaluate it.'
     }
   ]
 };
@@ -54,9 +61,11 @@ export default function JsonFormatPage() {
           <li><code>questions</code> must contain at least one question.</li>
           <li>Use <code>type: "multiple_choice"</code> with <code>options</code> and <code>answerIndex</code> for standard MCQs.</li>
           <li>Use <code>type: "select_all"</code> with <code>options</code> and <code>answerIndexes</code> for checkbox-style questions.</li>
+          <li>Use <code>type: "ordering"</code> with <code>options</code> and <code>answerIndexes</code> for sequence questions.</li>
           <li>Use <code>type: "fill_blank"</code> with <code>acceptedAnswers</code> for text-entry questions.</li>
           <li><code>answerIndex</code> must point to a valid option for multiple-choice questions.</li>
           <li><code>answerIndexes</code> must contain valid, non-duplicate option indexes for select-all questions.</li>
+          <li>For ordering questions, <code>answerIndexes</code> must contain every option index exactly once in the correct sequence.</li>
           <li><code>acceptedAnswers</code> accepts one or more valid answers, and grading ignores case and extra spaces.</li>
         </ul>
       </div>

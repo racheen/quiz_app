@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 
 type Question = {
   id: string;
-  type: 'multiple_choice' | 'select_all' | 'fill_blank';
+  type: 'multiple_choice' | 'select_all' | 'ordering' | 'fill_blank';
   prompt: string;
   options: string[];
   answerIndex: number | null;
@@ -34,6 +34,14 @@ function answersMatch(selected: number[], expected: number[]) {
   );
 }
 
+function orderingMatches(selected: number[], expected: number[]) {
+  return selected.length === expected.length && selected.every((value, index) => value === expected[index]);
+}
+
+function getOrderingLabel(options: string[], order: number[]) {
+  return order.map((optionIndex, index) => `${index + 1}. ${options[optionIndex]}`).join(' | ');
+}
+
 export function QuizRunner({ quizTitle, questions }: { quizTitle: string; questions: Question[] }) {
   const [answers, setAnswers] = useState<Record<string, AnswerValue>>({});
   const [submitted, setSubmitted] = useState(false);
@@ -58,6 +66,10 @@ export function QuizRunner({ quizTitle, questions }: { quizTitle: string; questi
 
       if (question.type === 'select_all') {
         return total + (Array.isArray(answer) && answersMatch(answer, question.answerIndexes) ? 1 : 0);
+      }
+
+      if (question.type === 'ordering') {
+        return total + (Array.isArray(answer) && orderingMatches(answer, question.answerIndexes) ? 1 : 0);
       }
 
       return total + (typeof answer === 'number' && answer === question.answerIndex ? 1 : 0);
@@ -112,7 +124,7 @@ export function QuizRunner({ quizTitle, questions }: { quizTitle: string; questi
         const wasAnswered =
           question.type === 'fill_blank'
             ? typeof selected === 'string' && selected.trim().length > 0
-            : question.type === 'select_all'
+            : question.type === 'select_all' || question.type === 'ordering'
               ? Array.isArray(selected) && selected.length > 0
               : typeof selected === 'number';
         const isCorrect =
@@ -124,6 +136,8 @@ export function QuizRunner({ quizTitle, questions }: { quizTitle: string; questi
               )
             : question.type === 'select_all'
               ? Array.isArray(selected) && answersMatch(selected, question.answerIndexes)
+              : question.type === 'ordering'
+                ? Array.isArray(selected) && orderingMatches(selected, question.answerIndexes)
               : typeof selected === 'number' && selected === question.answerIndex;
         const selectedLabel =
           question.type === 'fill_blank'
@@ -134,6 +148,10 @@ export function QuizRunner({ quizTitle, questions }: { quizTitle: string; questi
               ? Array.isArray(selected) && selected.length > 0
                 ? normalizeSelectedIndexes(selected).map((answerIndex) => question.options[answerIndex]).join(', ')
                 : null
+              : question.type === 'ordering'
+                ? Array.isArray(selected) && selected.length > 0
+                  ? getOrderingLabel(question.options, selected)
+                  : null
               : typeof selected === 'number'
               ? question.options[selected]
               : null;
@@ -144,6 +162,8 @@ export function QuizRunner({ quizTitle, questions }: { quizTitle: string; questi
               ? normalizeSelectedIndexes(question.answerIndexes)
                   .map((answerIndex) => question.options[answerIndex])
                   .join(', ')
+              : question.type === 'ordering'
+                ? getOrderingLabel(question.options, question.answerIndexes)
             : question.answerIndex !== null
               ? question.options[question.answerIndex]
               : '';
@@ -189,6 +209,60 @@ export function QuizRunner({ quizTitle, questions }: { quizTitle: string; questi
                     </label>
                   );
                 })}
+              </div>
+            ) : question.type === 'ordering' ? (
+              <div className="list">
+                {(Array.isArray(selected) ? selected : question.options.map((_, optionIndex) => optionIndex)).map(
+                  (optionIndex, orderIndex, currentOrder) => {
+                    const moveOption = (direction: -1 | 1) => {
+                      setAnswers((prev) => {
+                        const baseOrder = Array.isArray(prev[question.id])
+                          ? [...(prev[question.id] as number[])]
+                          : question.options.map((_, indexValue) => indexValue);
+                        const targetIndex = orderIndex + direction;
+
+                        if (targetIndex < 0 || targetIndex >= baseOrder.length) {
+                          return prev;
+                        }
+
+                        [baseOrder[orderIndex], baseOrder[targetIndex]] = [baseOrder[targetIndex], baseOrder[orderIndex]];
+                        return { ...prev, [question.id]: baseOrder };
+                      });
+                    };
+
+                    const positionIsCorrect = submitted && question.answerIndexes[orderIndex] === optionIndex;
+
+                    return (
+                      <div
+                        key={optionIndex}
+                        className={`ordering-option ${submitted ? (positionIsCorrect ? 'correct' : 'wrong') : ''}`}
+                      >
+                        <div className="ordering-option-copy">
+                          <span className="badge">#{orderIndex + 1}</span>
+                          <span>{question.options[optionIndex]}</span>
+                        </div>
+                        <div className="ordering-controls">
+                          <button
+                            type="button"
+                            className="btn secondary"
+                            onClick={() => moveOption(-1)}
+                            disabled={submitted || orderIndex === 0}
+                          >
+                            Up
+                          </button>
+                          <button
+                            type="button"
+                            className="btn secondary"
+                            onClick={() => moveOption(1)}
+                            disabled={submitted || orderIndex === currentOrder.length - 1}
+                          >
+                            Down
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  }
+                )}
               </div>
             ) : (
               <div className="list">

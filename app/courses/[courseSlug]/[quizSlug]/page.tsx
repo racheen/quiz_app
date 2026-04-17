@@ -29,7 +29,7 @@ export default async function QuizPage({ params }: { params: { courseSlug: strin
 
     const questions = quiz.questions.map((question) => ({
       id: question.id,
-      type: question.type as 'multiple_choice' | 'select_all' | 'fill_blank',
+      type: question.type as 'multiple_choice' | 'select_all' | 'ordering' | 'fill_blank',
       prompt: question.prompt,
       options: (question.options as string[] | null) ?? [],
       answerIndex: question.answerIndex,

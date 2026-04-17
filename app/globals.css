@@ -195,6 +195,36 @@ button, input, textarea { font: inherit; }
 .option.correct { border-color: var(--success); }
 .option.wrong { border-color: var(--danger); }
 
+.ordering-option {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: rgba(255,255,255,0.02);
+}
+
+.ordering-option.correct {
+  border-color: var(--success);
+}
+
+.ordering-option.wrong {
+  border-color: var(--danger);
+}
+
+.ordering-option-copy {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.ordering-controls {
+  display: flex;
+  gap: 10px;
+}
+
 .quiz-header {
   scroll-margin-top: 96px;
 }
@@ -295,6 +325,15 @@ pre {
 
   .quiz-score-ring {
     min-height: 120px;
+  }
+
+  .ordering-option {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .ordering-controls {
+    justify-content: flex-end;
   }
 
   .admin-course-head,

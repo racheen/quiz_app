@@ -56,7 +56,7 @@ export default async function AdminPage() {
               ...quiz,
               questions: quiz.questions.map((question) => ({
                 ...question,
-                type: question.type as 'multiple_choice' | 'select_all' | 'fill_blank',
+                type: question.type as 'multiple_choice' | 'select_all' | 'ordering' | 'fill_blank',
                 options: (question.options as string[] | null) ?? [],
                 acceptedAnswers: (question.acceptedAnswers as string[] | null) ?? [],
                 answerIndex: question.answerIndex,

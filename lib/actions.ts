@@ -60,6 +60,20 @@ function parseQuizPayload(jsonText: string) {
     throw new Error('INVALID_ANSWER_INDEXES');
   }
 
+  const invalidOrderingAnswer = parsed.questions.find(
+    (question) =>
+      question.type === 'ordering' &&
+      (question.answerIndexes.length !== question.options.length ||
+        question.answerIndexes.some(
+          (answerIndex) => answerIndex < 0 || answerIndex >= question.options.length
+        ) ||
+        new Set(question.answerIndexes).size !== question.answerIndexes.length)
+  );
+
+  if (invalidOrderingAnswer) {
+    throw new Error('INVALID_ORDERING_ANSWER_INDEXES');
+  }
+
   return { parsed, slug };
 }
 
@@ -117,6 +131,10 @@ export async function uploadQuizAction(_: ActionState, formData: FormData): Prom
         return { ok: false, message: 'One or more select-all questions has invalid answerIndexes.' };
       }
 
+      if (error instanceof Error && error.message === 'INVALID_ORDERING_ANSWER_INDEXES') {
+        return { ok: false, message: 'One or more ordering questions has invalid answerIndexes.' };
+      }
+
       throw error;
     }
 
@@ -132,11 +150,14 @@ export async function uploadQuizAction(_: ActionState, formData: FormData): Prom
             type: question.type,
             prompt: question.prompt,
             options:
-              question.type === 'multiple_choice' || question.type === 'select_all'
+              question.type === 'multiple_choice' ||
+              question.type === 'select_all' ||
+              question.type === 'ordering'
                 ? question.options
                 : undefined,
             answerIndex: question.type === 'multiple_choice' ? question.answerIndex : undefined,
-            answerIndexes: question.type === 'select_all' ? question.answerIndexes : [],
+            answerIndexes:
+              question.type === 'select_all' || question.type === 'ordering' ? question.answerIndexes : [],
             acceptedAnswers: question.type === 'fill_blank' ? question.acceptedAnswers : undefined,
             explanation: question.explanation
           }))
@@ -183,6 +204,10 @@ export async function updateQuizAction(_: ActionState, formData: FormData): Prom
         return { ok: false, message: 'One or more select-all questions has invalid answerIndexes.' };
       }
 
+      if (error instanceof Error && error.message === 'INVALID_ORDERING_ANSWER_INDEXES') {
+        return { ok: false, message: 'One or more ordering questions has invalid answerIndexes.' };
+      }
+
       throw error;
     }
 
@@ -200,11 +225,14 @@ export async function updateQuizAction(_: ActionState, formData: FormData): Prom
             type: question.type,
             prompt: question.prompt,
             options:
-              question.type === 'multiple_choice' || question.type === 'select_all'
+              question.type === 'multiple_choice' ||
+              question.type === 'select_all' ||
+              question.type === 'ordering'
                 ? question.options
                 : undefined,
             answerIndex: question.type === 'multiple_choice' ? question.answerIndex : undefined,
-            answerIndexes: question.type === 'select_all' ? question.answerIndexes : [],
+            answerIndexes:
+              question.type === 'select_all' || question.type === 'ordering' ? question.answerIndexes : [],
             acceptedAnswers: question.type === 'fill_blank' ? question.acceptedAnswers : undefined,
             explanation: question.explanation
           }))
