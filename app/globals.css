@@ -9,6 +9,7 @@
   --border: #2b3768;
   --danger: #ff7a7a;
   --success: #63d6a5;
+  --warning: #ffd27d;
 }
 
 * { box-sizing: border-box; }
@@ -229,6 +230,143 @@ button, input, textarea { font: inherit; }
   scroll-margin-top: 96px;
 }
 
+.quiz-shell {
+  display: grid;
+  gap: 20px;
+  align-items: start;
+  grid-template-columns: 280px minmax(0, 1fr);
+}
+
+.quiz-main {
+  min-width: 0;
+}
+
+.quiz-sidebar {
+  display: grid;
+  gap: 16px;
+  align-self: start;
+  position: sticky;
+  top: 96px;
+  height: calc(100vh - 120px);
+  padding: 16px;
+  overflow: hidden;
+}
+
+.quiz-sidebar-stack,
+.quiz-sidebar-section,
+.quiz-course-list,
+.quiz-question-jump {
+  display: grid;
+  gap: 10px;
+}
+
+.quiz-sidebar-stack {
+  align-content: start;
+  grid-template-rows: auto minmax(0, 1fr) minmax(0, 1fr);
+  height: 100%;
+  min-height: 0;
+}
+
+.quiz-sidebar-section {
+  min-height: 0;
+  padding-bottom: 2px;
+}
+
+.quiz-sidebar-section-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+}
+
+.quiz-sidebar-kicker {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.quiz-sidebar-panel {
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 6px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  scrollbar-gutter: stable;
+}
+
+.quiz-course-home,
+.quiz-course-link {
+  display: grid;
+  gap: 6px;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: rgba(255,255,255,0.03);
+}
+
+.quiz-course-home strong,
+.quiz-course-title {
+  line-height: 1.4;
+}
+
+.quiz-course-title {
+  font-weight: 700;
+}
+
+.quiz-course-index,
+.quiz-course-state {
+  font-size: 0.82rem;
+}
+
+.quiz-course-index {
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.quiz-course-state {
+  color: var(--accent-2);
+  font-weight: 700;
+}
+
+.quiz-course-link.active,
+.quiz-course-home:hover,
+.quiz-course-link:hover {
+  border-color: rgba(124, 156, 255, 0.7);
+  background: linear-gradient(180deg, rgba(124, 156, 255, 0.16), rgba(255,255,255,0.03));
+}
+
+.quiz-question-link {
+  width: 100%;
+  text-align: left;
+  padding: 10px 12px;
+  border: none;
+  border-left: 2px solid transparent;
+  border-radius: 0 12px 12px 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.quiz-question-link.active {
+  border-left-color: rgba(124, 156, 255, 0.95);
+  background: rgba(124, 156, 255, 0.12);
+}
+
+.quiz-question-link.answered {
+  font-weight: 700;
+}
+
+.quiz-question-link.unanswered {
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.quiz-question-link:hover {
+  background: rgba(255,255,255,0.04);
+}
+
 .quiz-summary {
   display: grid;
   grid-template-columns: minmax(140px, 180px) 1fr;
@@ -271,6 +409,10 @@ button, input, textarea { font: inherit; }
   margin: 6px 0;
 }
 
+.quiz-question-card {
+  scroll-margin-top: 96px;
+}
+
 .quiz-feedback {
   margin-top: 14px;
   padding-top: 14px;
@@ -296,6 +438,21 @@ button, input, textarea { font: inherit; }
   margin-bottom: 6px;
 }
 
+.quiz-footer {
+  display: grid;
+  gap: 14px;
+}
+
+.quiz-footer-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.quiz-footer p {
+  margin: 0;
+}
+
 .muted { color: var(--muted); }
 .success { color: var(--success); }
 .error { color: var(--danger); }
@@ -318,6 +475,21 @@ pre {
   padding: 16px;
 }
 
+@media (max-width: 980px) {
+  .quiz-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .quiz-sidebar {
+    top: 84px;
+    height: calc(100vh - 108px);
+  }
+
+  .quiz-question-jump {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  }
+}
+
 @media (max-width: 700px) {
   .quiz-summary {
     grid-template-columns: 1fr;
@@ -334,6 +506,22 @@ pre {
 
   .ordering-controls {
     justify-content: flex-end;
+  }
+
+  .quiz-sidebar-section-head {
+    display: grid;
+    gap: 4px;
+  }
+
+  .quiz-course-home,
+  .quiz-course-link {
+    padding: 12px;
+  }
+
+  .quiz-footer-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: stretch;
   }
 
   .admin-course-head,
