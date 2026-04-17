@@ -4,21 +4,38 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 
 type Question = {
   id: string;
-  type: 'multiple_choice' | 'fill_blank';
+  type: 'multiple_choice' | 'select_all' | 'fill_blank';
   prompt: string;
   options: string[];
   answerIndex: number | null;
+  answerIndexes: number[];
   acceptedAnswers: string[];
   explanation: string | null;
   order: number;
 };
 
+type AnswerValue = string | number | number[];
+
 function normalizeFillBlankAnswer(value: string) {
   return value.trim().toLowerCase().replace(/\s+/g, ' ');
 }
 
+function normalizeSelectedIndexes(value: number[]) {
+  return [...value].sort((a, b) => a - b);
+}
+
+function answersMatch(selected: number[], expected: number[]) {
+  const normalizedSelected = normalizeSelectedIndexes(selected);
+  const normalizedExpected = normalizeSelectedIndexes(expected);
+
+  return (
+    normalizedSelected.length === normalizedExpected.length &&
+    normalizedSelected.every((value, index) => value === normalizedExpected[index])
+  );
+}
+
 export function QuizRunner({ quizTitle, questions }: { quizTitle: string; questions: Question[] }) {
-  const [answers, setAnswers] = useState<Record<string, string | number>>({});
+  const [answers, setAnswers] = useState<Record<string, AnswerValue>>({});
   const [submitted, setSubmitted] = useState(false);
   const summaryRef = useRef<HTMLDivElement | null>(null);
 
@@ -37,6 +54,10 @@ export function QuizRunner({ quizTitle, questions }: { quizTitle: string; questi
         );
 
         return total + (isCorrect ? 1 : 0);
+      }
+
+      if (question.type === 'select_all') {
+        return total + (Array.isArray(answer) && answersMatch(answer, question.answerIndexes) ? 1 : 0);
       }
 
       return total + (typeof answer === 'number' && answer === question.answerIndex ? 1 : 0);
@@ -60,7 +81,7 @@ export function QuizRunner({ quizTitle, questions }: { quizTitle: string; questi
         <p className="muted">
           {submitted
             ? 'Your results are ready below. Review each question to see what was correct and any explanations provided.'
-            : 'Choose one answer for each question, then submit to see your score and review.'}
+            : 'Answer each question, then submit to see your score and review.'}
         </p>
         {submitted ? (
           <div className="quiz-summary">
@@ -91,7 +112,9 @@ export function QuizRunner({ quizTitle, questions }: { quizTitle: string; questi
         const wasAnswered =
           question.type === 'fill_blank'
             ? typeof selected === 'string' && selected.trim().length > 0
-            : typeof selected === 'number';
+            : question.type === 'select_all'
+              ? Array.isArray(selected) && selected.length > 0
+              : typeof selected === 'number';
         const isCorrect =
           question.type === 'fill_blank'
             ? typeof selected === 'string' &&
@@ -99,18 +122,28 @@ export function QuizRunner({ quizTitle, questions }: { quizTitle: string; questi
                 (acceptedAnswer) =>
                   normalizeFillBlankAnswer(acceptedAnswer) === normalizeFillBlankAnswer(selected)
               )
-            : typeof selected === 'number' && selected === question.answerIndex;
+            : question.type === 'select_all'
+              ? Array.isArray(selected) && answersMatch(selected, question.answerIndexes)
+              : typeof selected === 'number' && selected === question.answerIndex;
         const selectedLabel =
           question.type === 'fill_blank'
             ? typeof selected === 'string'
               ? selected
               : null
-            : typeof selected === 'number'
+            : question.type === 'select_all'
+              ? Array.isArray(selected) && selected.length > 0
+                ? normalizeSelectedIndexes(selected).map((answerIndex) => question.options[answerIndex]).join(', ')
+                : null
+              : typeof selected === 'number'
               ? question.options[selected]
               : null;
         const correctLabel =
           question.type === 'fill_blank'
             ? question.acceptedAnswers.join(', ')
+            : question.type === 'select_all'
+              ? normalizeSelectedIndexes(question.answerIndexes)
+                  .map((answerIndex) => question.options[answerIndex])
+                  .join(', ')
             : question.answerIndex !== null
               ? question.options[question.answerIndex]
               : '';
@@ -126,6 +159,37 @@ export function QuizRunner({ quizTitle, questions }: { quizTitle: string; questi
                 placeholder="Type your answer"
                 onChange={(event) => setAnswers((prev) => ({ ...prev, [question.id]: event.target.value }))}
               />
+            ) : question.type === 'select_all' ? (
+              <div className="list">
+                {question.options.map((option, optionIndex) => {
+                  const selectedIndexes = Array.isArray(selected) ? selected : [];
+                  const isChecked = selectedIndexes.includes(optionIndex);
+                  const optionIsCorrect = submitted && question.answerIndexes.includes(optionIndex);
+                  const optionIsWrong =
+                    submitted && isChecked && !question.answerIndexes.includes(optionIndex);
+
+                  return (
+                    <label key={optionIndex} className={`option ${optionIsCorrect ? 'correct' : ''} ${optionIsWrong ? 'wrong' : ''}`}>
+                      <input
+                        type="checkbox"
+                        name={`${question.id}-${optionIndex}`}
+                        checked={isChecked}
+                        onChange={() =>
+                          setAnswers((prev) => {
+                            const current = Array.isArray(prev[question.id]) ? [...(prev[question.id] as number[])] : [];
+                            const next = current.includes(optionIndex)
+                              ? current.filter((value) => value !== optionIndex)
+                              : [...current, optionIndex];
+
+                            return { ...prev, [question.id]: normalizeSelectedIndexes(next) };
+                          })
+                        }
+                      />
+                      <span>{option}</span>
+                    </label>
+                  );
+                })}
+              </div>
             ) : (
               <div className="list">
                 {question.options.map((option, optionIndex) => {

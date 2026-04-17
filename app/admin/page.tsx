@@ -32,6 +32,7 @@ export default async function AdminPage() {
                 prompt: true,
                 options: true,
                 answerIndex: true,
+                answerIndexes: true,
                 acceptedAnswers: true,
                 explanation: true,
                 order: true
@@ -55,10 +56,11 @@ export default async function AdminPage() {
               ...quiz,
               questions: quiz.questions.map((question) => ({
                 ...question,
-                type: question.type as 'multiple_choice' | 'fill_blank',
+                type: question.type as 'multiple_choice' | 'select_all' | 'fill_blank',
                 options: (question.options as string[] | null) ?? [],
                 acceptedAnswers: (question.acceptedAnswers as string[] | null) ?? [],
-                answerIndex: question.answerIndex
+                answerIndex: question.answerIndex,
+                answerIndexes: question.answerIndexes
               }))
             }))
           }))}
@@ -70,7 +72,7 @@ export default async function AdminPage() {
       return (
         <DatabaseUnavailable
           title="Admin unavailable"
-          message="Postgres is not reachable at localhost:5434, so course creation and quiz upload are currently disabled. Start the Docker database and run `npm run db:push`, then refresh."
+          message="The database is currently unavailable, so course creation and quiz upload are disabled. Check your `DATABASE_URL`, make sure your hosted Postgres instance is running, apply the Prisma schema, then refresh."
         />
       );
     }

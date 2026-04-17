@@ -10,7 +10,7 @@ import { createCourseSchema, quizUploadSchema } from '@/lib/validators';
 
 function getCourseMutationErrorMessage(error: unknown) {
   if (isDatabaseUnavailableError(error)) {
-    return 'Postgres is not reachable at localhost:5434.';
+    return 'The database is currently unavailable. Check your DATABASE_URL and database connection, then try again.';
   }
 
   if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2002') {
@@ -22,7 +22,7 @@ function getCourseMutationErrorMessage(error: unknown) {
 
 function getQuizMutationErrorMessage(error: unknown) {
   if (isDatabaseUnavailableError(error)) {
-    return 'Postgres is not reachable at localhost:5434.';
+    return 'The database is currently unavailable. Check your DATABASE_URL and database connection, then try again.';
   }
 
   if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2002') {
@@ -45,6 +45,19 @@ function parseQuizPayload(jsonText: string) {
 
   if (invalidAnswer) {
     throw new Error('INVALID_ANSWER_INDEX');
+  }
+
+  const invalidSelectAllAnswer = parsed.questions.find(
+    (question) =>
+      question.type === 'select_all' &&
+      (question.answerIndexes.some(
+        (answerIndex) => answerIndex < 0 || answerIndex >= question.options.length
+      ) ||
+        new Set(question.answerIndexes).size !== question.answerIndexes.length)
+  );
+
+  if (invalidSelectAllAnswer) {
+    throw new Error('INVALID_ANSWER_INDEXES');
   }
 
   return { parsed, slug };
@@ -100,6 +113,10 @@ export async function uploadQuizAction(_: ActionState, formData: FormData): Prom
         return { ok: false, message: 'One or more questions has an invalid answerIndex.' };
       }
 
+      if (error instanceof Error && error.message === 'INVALID_ANSWER_INDEXES') {
+        return { ok: false, message: 'One or more select-all questions has invalid answerIndexes.' };
+      }
+
       throw error;
     }
 
@@ -114,8 +131,12 @@ export async function uploadQuizAction(_: ActionState, formData: FormData): Prom
             order: index + 1,
             type: question.type,
             prompt: question.prompt,
-            options: question.type === 'multiple_choice' ? question.options : undefined,
+            options:
+              question.type === 'multiple_choice' || question.type === 'select_all'
+                ? question.options
+                : undefined,
             answerIndex: question.type === 'multiple_choice' ? question.answerIndex : undefined,
+            answerIndexes: question.type === 'select_all' ? question.answerIndexes : [],
             acceptedAnswers: question.type === 'fill_blank' ? question.acceptedAnswers : undefined,
             explanation: question.explanation
           }))
@@ -158,6 +179,10 @@ export async function updateQuizAction(_: ActionState, formData: FormData): Prom
         return { ok: false, message: 'One or more questions has an invalid answerIndex.' };
       }
 
+      if (error instanceof Error && error.message === 'INVALID_ANSWER_INDEXES') {
+        return { ok: false, message: 'One or more select-all questions has invalid answerIndexes.' };
+      }
+
       throw error;
     }
 
@@ -174,8 +199,12 @@ export async function updateQuizAction(_: ActionState, formData: FormData): Prom
             order: index + 1,
             type: question.type,
             prompt: question.prompt,
-            options: question.type === 'multiple_choice' ? question.options : undefined,
+            options:
+              question.type === 'multiple_choice' || question.type === 'select_all'
+                ? question.options
+                : undefined,
             answerIndex: question.type === 'multiple_choice' ? question.answerIndex : undefined,
+            answerIndexes: question.type === 'select_all' ? question.answerIndexes : [],
             acceptedAnswers: question.type === 'fill_blank' ? question.acceptedAnswers : undefined,
             explanation: question.explanation
           }))

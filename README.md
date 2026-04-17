@@ -34,7 +34,7 @@ cp .env.example .env
 Default local connection string:
 
 ```env
-DATABASE_URL="postgresql://postgres:postgres@localhost:5432/quiz_mvp?schema=public"
+DATABASE_URL="postgresql://postgres:postgres@localhost:5434/quiz_mvp?schema=public"
 ```
 
 ## 3) Install dependencies
@@ -70,6 +70,36 @@ npm run dev
 
 Open `http://localhost:3000`
 
+## Deploy on Vercel
+
+Recommended MVP setup:
+
+- Host the app on Vercel
+- Host PostgreSQL on Neon
+
+Deployment checklist:
+
+1. Push this repo to GitHub.
+2. Create a hosted Postgres database and copy its connection string into `DATABASE_URL` in Vercel.
+3. Deploy the repo to Vercel.
+4. Apply the Prisma schema to the hosted database:
+
+```bash
+npx prisma migrate deploy
+```
+
+5. Optional: seed starter data after the schema is live:
+
+```bash
+npm run db:seed
+```
+
+Notes:
+
+- `postinstall` runs `prisma generate`, so Vercel builds the Prisma client automatically.
+- This repo now includes an initial Prisma migration, so production should use `npx prisma migrate deploy`.
+- `npx prisma db push` is still fine for quick local MVP work, but avoid it for long-term production schema history.
+
 ## JSON upload format
 
 Upload one quiz JSON at a time.
@@ -100,6 +130,18 @@ Upload one quiz JSON at a time.
         "training set"
       ],
       "explanation": "Overfitting usually means the model memorizes patterns from the training data."
+    },
+    {
+      "type": "select_all",
+      "prompt": "Select all supervised learning tasks.",
+      "options": [
+        "Classification",
+        "Regression",
+        "Clustering",
+        "Dimensionality reduction"
+      ],
+      "answerIndexes": [0, 1],
+      "explanation": "Classification and regression use labeled data, while clustering and dimensionality reduction do not."
     }
   ]
 }
