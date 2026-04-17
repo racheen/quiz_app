@@ -36,6 +36,13 @@ const starterJson = `{
       "prompt": "Fill in the blank: Overfitting happens when a model learns the ______ data too closely.",
       "acceptedAnswers": ["training", "training set"],
       "explanation": "Overfitting usually means the model memorizes patterns from the training data."
+    },
+    {
+      "type": "select_all",
+      "prompt": "Select all supervised learning tasks.",
+      "options": ["Classification", "Regression", "Clustering", "Dimensionality reduction"],
+      "answerIndexes": [0, 1],
+      "explanation": "Classification and regression use labeled data, while clustering and dimensionality reduction do not."
     }
   ]
 }`;

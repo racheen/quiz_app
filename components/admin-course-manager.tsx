@@ -6,10 +6,11 @@ import { initialActionState } from '@/lib/action-state';
 import { deleteCourseAction, deleteQuizAction, updateQuizAction } from '@/lib/actions';
 
 type AdminQuestion = {
-  type: 'multiple_choice' | 'fill_blank';
+  type: 'multiple_choice' | 'select_all' | 'fill_blank';
   prompt: string;
   options: string[];
   answerIndex: number | null;
+  answerIndexes: number[];
   acceptedAnswers: string[];
   explanation: string | null;
   order: number;
@@ -49,6 +50,14 @@ function quizToJson(quiz: AdminQuiz) {
                 acceptedAnswers: question.acceptedAnswers,
                 explanation: question.explanation ?? undefined
               }
+            : question.type === 'select_all'
+              ? {
+                  type: 'select_all',
+                  prompt: question.prompt,
+                  options: question.options,
+                  answerIndexes: question.answerIndexes,
+                  explanation: question.explanation ?? undefined
+                }
             : {
                 type: 'multiple_choice',
                 prompt: question.prompt,
