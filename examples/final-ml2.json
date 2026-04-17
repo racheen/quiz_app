@@ -1,0 +1,407 @@
+{
+  "title": "Full Mock Exam (40 Questions)",
+  "slug": "full-mock-exam-40-questions",
+  "description": "Comprehensive practice exam covering Weeks 2–12",
+  "questions": [
+    {
+      "prompt": "NLP stands for:",
+      "options": [
+        "Neural Learning Process",
+        "Natural Language Processing",
+        "Network Language Programming",
+        "Numeric Logic Processing"
+      ],
+      "answerIndex": 1
+    },
+    {
+      "prompt": "Which is NOT an NLP task?",
+      "options": [
+        "Sentiment analysis",
+        "Image classification",
+        "Text summarization",
+        "Named entity recognition"
+      ],
+      "answerIndex": 1
+    },
+    {
+      "prompt": "Lowercasing text helps with:",
+      "options": [
+        "Increasing complexity",
+        "Vocabulary reduction",
+        "Increasing noise",
+        "Slowing computation"
+      ],
+      "answerIndex": 1
+    },
+    {
+      "prompt": "Removing punctuation is mainly for:",
+      "options": [
+        "Adding features",
+        "Cleaning data",
+        "Increasing model size",
+        "Improving grammar"
+      ],
+      "answerIndex": 1
+    },
+    {
+      "prompt": "Which technique reduces words to root form quickly but may be inaccurate?",
+      "options": [
+        "Lemmatization",
+        "Tokenization",
+        "Stemming",
+        "Vectorization"
+      ],
+      "answerIndex": 2
+    },
+    {
+      "prompt": "Lemmatization differs from stemming because it:",
+      "options": [
+        "Is faster",
+        "Uses linguistic knowledge",
+        "Ignores meaning",
+        "Removes all suffixes"
+      ],
+      "answerIndex": 1
+    },
+    {
+      "prompt": "Tokenization means:",
+      "options": [
+        "Removing stop words",
+        "Splitting text into smaller units",
+        "Converting text to numbers",
+        "Correcting spelling"
+      ],
+      "answerIndex": 1
+    },
+    {
+      "prompt": "Bag of Words ignores:",
+      "options": [
+        "Word frequency",
+        "Word meaning",
+        "Word order",
+        "Word importance"
+      ],
+      "answerIndex": 2
+    },
+    {
+      "prompt": "TF-IDF measures:",
+      "options": [
+        "Grammar correctness",
+        "Word importance in documents",
+        "Sentence length",
+        "Token size"
+      ],
+      "answerIndex": 1
+    },
+    {
+      "prompt": "Word2Vec produces:",
+      "options": [
+        "Tokens",
+        "Vectors (embeddings)",
+        "Sentences",
+        "Labels"
+      ],
+      "answerIndex": 1
+    },
+    {
+      "prompt": "Encoder-decoder models are mainly used for:",
+      "options": [
+        "Image detection",
+        "Language translation",
+        "Clustering",
+        "Regression"
+      ],
+      "answerIndex": 1
+    },
+    {
+      "prompt": "Self-attention helps models:",
+      "options": [
+        "Ignore context",
+        "Focus on important words",
+        "Remove tokens",
+        "Reduce dataset size"
+      ],
+      "answerIndex": 1
+    },
+    {
+      "prompt": "Hugging Face is:",
+      "options": [
+        "A database",
+        "A cloud storage tool",
+        "A ML platform for models & datasets",
+        "A programming language"
+      ],
+      "answerIndex": 2
+    },
+    {
+      "prompt": "Pipeline approach is:",
+      "options": [
+        "Low-level and complex",
+        "High-level and easy",
+        "Not usable",
+        "Only for experts"
+      ],
+      "answerIndex": 1
+    },
+    {
+      "prompt": "Model approach gives:",
+      "options": [
+        "Less control",
+        "No flexibility",
+        "More control and customization",
+        "Faster results always"
+      ],
+      "answerIndex": 2
+    },
+    {
+      "prompt": "Grayscale images have:",
+      "options": [
+        "3 channels",
+        "1 channel",
+        "4 channels",
+        "No channels"
+      ],
+      "answerIndex": 1
+    },
+    {
+      "prompt": "RGB image is represented as:",
+      "options": [
+        "1D array",
+        "2D array",
+        "3D tensor",
+        "Scalar"
+      ],
+      "answerIndex": 2
+    },
+    {
+      "prompt": "Pixel values range (grayscale):",
+      "options": [
+        "0–1",
+        "0–100",
+        "0–255",
+        "1–1000"
+      ],
+      "answerIndex": 2
+    },
+    {
+      "prompt": "Flattening means:",
+      "options": [
+        "Increasing dimensions",
+        "Converting 2D → 1D",
+        "Removing pixels",
+        "Scaling data"
+      ],
+      "answerIndex": 1
+    },
+    {
+      "prompt": "Object detection involves:",
+      "options": [
+        "Only classification",
+        "Only segmentation",
+        "Identifying and locating objects",
+        "Clustering"
+      ],
+      "answerIndex": 2
+    },
+    {
+      "prompt": "Responsible AI focuses on:",
+      "options": [
+        "Speed only",
+        "Accuracy only",
+        "Ethical and fair AI use",
+        "Hardware design"
+      ],
+      "answerIndex": 2
+    },
+    {
+      "prompt": "Which is an example of bias?",
+      "options": [
+        "Clean data",
+        "Random sampling",
+        "Gender discrimination",
+        "Normalization"
+      ],
+      "answerIndex": 2
+    },
+    {
+      "prompt": "White-box models are:",
+      "options": [
+        "Hard to interpret",
+        "Easy to interpret",
+        "Always inaccurate",
+        "Always deep learning"
+      ],
+      "answerIndex": 1
+    },
+    {
+      "prompt": "Black-box models are:",
+      "options": [
+        "Simple",
+        "Transparent",
+        "Complex but less interpretable",
+        "Linear only"
+      ],
+      "answerIndex": 2
+    },
+    {
+      "prompt": "Sampling bias occurs when:",
+      "options": [
+        "Data is random",
+        "Data is representative",
+        "Data is not representative",
+        "Data is normalized"
+      ],
+      "answerIndex": 2
+    },
+    {
+      "prompt": "Counterfactual explanations help:",
+      "options": [
+        "Remove data",
+        "Explain predictions",
+        "Train models faster",
+        "Normalize features"
+      ],
+      "answerIndex": 1
+    },
+    {
+      "prompt": "Precision measures:",
+      "options": [
+        "Correct positives out of predicted positives",
+        "Correct negatives",
+        "Total accuracy",
+        "Recall rate"
+      ],
+      "answerIndex": 0
+    },
+    {
+      "prompt": "Recall measures:",
+      "options": [
+        "Correct positives out of actual positives",
+        "Total predictions",
+        "Model speed",
+        "Error rate"
+      ],
+      "answerIndex": 0
+    },
+    {
+      "prompt": "F1 Score is:",
+      "options": [
+        "Arithmetic mean",
+        "Harmonic mean",
+        "Geometric mean",
+        "Weighted sum"
+      ],
+      "answerIndex": 1
+    },
+    {
+      "prompt": "Dev set should:",
+      "options": [
+        "Be very small",
+        "Represent future data",
+        "Be random only",
+        "Be ignored"
+      ],
+      "answerIndex": 1
+    },
+    {
+      "prompt": "Streamlit is used for:",
+      "options": [
+        "Database management",
+        "Web apps for ML",
+        "Image labeling",
+        "Training models"
+      ],
+      "answerIndex": 1
+    },
+    {
+      "prompt": "Streamlit auto-reloads when:",
+      "options": [
+        "Server crashes",
+        "Code changes",
+        "Data changes",
+        "Model trains"
+      ],
+      "answerIndex": 1
+    },
+    {
+      "prompt": "Alteryx is mainly:",
+      "options": [
+        "Programming language",
+        "Data analytics platform",
+        "Deep learning library",
+        "Database"
+      ],
+      "answerIndex": 1
+    },
+    {
+      "prompt": "RapidMiner supports:",
+      "options": [
+        "Only coding",
+        "Drag-and-drop workflows",
+        "Only SQL",
+        "No ML"
+      ],
+      "answerIndex": 1
+    },
+    {
+      "prompt": "Time series data is:",
+      "options": [
+        "Random data",
+        "Data over time",
+        "Images",
+        "Text"
+      ],
+      "answerIndex": 1
+    },
+    {
+      "prompt": "Seasonality means:",
+      "options": [
+        "Random spikes",
+        "Repeating patterns",
+        "Noise",
+        "Errors"
+      ],
+      "answerIndex": 1
+    },
+    {
+      "prompt": "Stationary data has:",
+      "options": [
+        "Changing mean",
+        "Constant mean & variance",
+        "Increasing variance",
+        "No variance"
+      ],
+      "answerIndex": 1
+    },
+    {
+      "prompt": "Neural networks are good for:",
+      "options": [
+        "Only structured data",
+        "Only text",
+        "Both structured & unstructured data",
+        "Only numbers"
+      ],
+      "answerIndex": 2
+    },
+    {
+      "prompt": "ReLU is:",
+      "options": [
+        "Loss function",
+        "Activation function",
+        "Optimizer",
+        "Dataset"
+      ],
+      "answerIndex": 1
+    },
+    {
+      "prompt": "Deep learning depends on:",
+      "options": [
+        "Small data",
+        "Only math",
+        "Data + computation + algorithms",
+        "Random guessing"
+      ],
+      "answerIndex": 2
+    }
+  ]
+}

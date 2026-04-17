@@ -1,0 +1,40 @@
+{
+  "title": "Week 9-12 Mock Exam 1",
+  "slug": "week-9-12-mock-exam-1",
+  "description": "Practice quiz with mixed question types",
+  "questions": [
+    {
+      "type": "multiple_choice",
+      "prompt": "What does NLP stand for?",
+      "options": [
+        "Natural Language Processing",
+        "Neural Logic Protocol",
+        "Numeric Language Parsing",
+        "Natural Learning Program"
+      ],
+      "answerIndex": 0,
+      "explanation": "NLP stands for Natural Language Processing."
+    },
+    {
+      "type": "multiple_choice",
+      "prompt": "Which type of model is easier to interpret?",
+      "options": [
+        "Black-box model",
+        "White-box model",
+        "Transformer-only model",
+        "Ensemble-only model"
+      ],
+      "answerIndex": 1,
+      "explanation": "White-box models are more interpretable."
+    },
+    {
+      "type": "fill_blank",
+      "prompt": "Fill in the blank: The dataset used to fit model parameters is the ______ set.",
+      "acceptedAnswers": [
+        "training",
+        "training set"
+      ],
+      "explanation": "The training set is used to learn the model parameters."
+    }
+  ]
+}
