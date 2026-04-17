@@ -19,7 +19,7 @@ export default async function HomePage() {
     return (
       <main className="container grid" style={{ gap: 24 }}>
         <section className="hero card">
-          <span className="badge">Niqi is superior</span>
+          <span className="badge">niqi is subelior</span>
           <h1>Quiz App for mock exams</h1>
           <p>
             Create a course, upload a quiz JSON file, and instantly publish multiple tests under that course.
