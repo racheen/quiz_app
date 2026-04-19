@@ -9,7 +9,15 @@ export default async function CoursesPage() {
   try {
     const courses = await prisma.course.findMany({
       orderBy: { createdAt: 'desc' },
-      include: { quizzes: { orderBy: { createdAt: 'desc' } } }
+      include: {
+        quizzes: {
+          orderBy: { createdAt: 'desc' },
+          take: 3
+        },
+        _count: {
+          select: { quizzes: true }
+        }
+      }
     });
 
     return (
@@ -18,30 +26,23 @@ export default async function CoursesPage() {
           <h1>Courses</h1>
           <p className="muted">Each course can contain multiple quizzes or mock exams.</p>
         </div>
-        {courses.map((course) => (
-          <div className="card" key={course.id}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap' }}>
-              <div>
+        <section className="grid two">
+          {courses.length === 0 ? (
+            <div className="card">
+              <h3>No courses yet</h3>
+              <p className="muted">Go to the admin page to create your first course and upload a quiz.</p>
+            </div>
+          ) : (
+            courses.map((course) => (
+              <Link key={course.id} href={`/courses/${course.slug}`} className="card">
                 <span className="badge">{course.code}</span>
-                <h2>{course.name}</h2>
+                <h3>{course.name}</h3>
                 <p className="muted">{course.description || 'No description yet.'}</p>
-              </div>
-              <Link className="btn secondary" href={`/courses/${course.slug}`}>Open course</Link>
-            </div>
-            <div className="list" style={{ marginTop: 16 }}>
-              {course.quizzes.length === 0 ? (
-                <p className="muted">No quizzes uploaded yet.</p>
-              ) : course.quizzes.map((quiz) => (
-                <Link key={quiz.id} href={`/courses/${course.slug}/${quiz.slug}`} className="option">
-                  <div>
-                    <strong>{quiz.title}</strong>
-                    <div className="muted">{quiz.description || 'No description'}</div>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
-        ))}
+                <p><strong>{course._count.quizzes}</strong> quiz{course._count.quizzes === 1 ? '' : 'zes'}</p>
+              </Link>
+            ))
+          )}
+        </section>
       </main>
     );
   } catch (error) {
