@@ -413,6 +413,68 @@ button, input, textarea { font: inherit; }
   scroll-margin-top: 96px;
 }
 
+.quiz-question-head {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.quiz-question-number {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.quiz-question-prompt {
+  display: grid;
+  gap: 10px;
+}
+
+.quiz-rich-text,
+.quiz-rich-code {
+  margin: 0;
+}
+
+.quiz-rich-text {
+  white-space: pre-wrap;
+}
+
+.quiz-rich-text-prompt {
+  font-size: clamp(1.2rem, 2vw, 1.55rem);
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.quiz-rich-text-body {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.quiz-rich-code {
+  overflow-x: auto;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: #0d1430;
+  white-space: pre;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+.quiz-rich-code-prompt {
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+}
+
+.option-copy,
+.quiz-feedback-answer {
+  white-space: pre-wrap;
+  line-height: 1.5;
+}
+
 .quiz-feedback {
   margin-top: 14px;
   padding-top: 14px;

@@ -33,6 +33,19 @@ type QuestionStatus = {
   correctLabel: string;
 };
 
+type ContentBlock =
+  | {
+      type: 'text';
+      content: string;
+    }
+  | {
+      type: 'code';
+      content: string;
+      language: string | null;
+    };
+
+const fencedCodeBlockPattern = /```([a-zA-Z0-9_-]+)?\n([\s\S]*?)```/g;
+
 function normalizeFillBlankAnswer(value: string) {
   return value.trim().toLowerCase().replace(/\s+/g, ' ');
 }
@@ -122,6 +135,137 @@ function getCorrectLabel(question: Question) {
   }
 
   return question.answerIndex !== null ? question.options[question.answerIndex] : '';
+}
+
+function pushTextBlocks(blocks: ContentBlock[], text: string) {
+  const normalized = text.trim();
+
+  if (!normalized) {
+    return;
+  }
+
+  normalized
+    .split(/\n{2,}/)
+    .map((paragraph) => paragraph.trim())
+    .filter(Boolean)
+    .forEach((paragraph) => {
+      blocks.push({ type: 'text', content: paragraph });
+    });
+}
+
+function getFencedCodeBlocks(content: string) {
+  const blocks: ContentBlock[] = [];
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+
+  fencedCodeBlockPattern.lastIndex = 0;
+
+  while ((match = fencedCodeBlockPattern.exec(content)) !== null) {
+    pushTextBlocks(blocks, content.slice(lastIndex, match.index));
+    blocks.push({
+      type: 'code',
+      content: match[2].replace(/\n+$/, ''),
+      language: match[1] ?? null
+    });
+    lastIndex = match.index + match[0].length;
+  }
+
+  if (blocks.length === 0) {
+    return [];
+  }
+
+  pushTextBlocks(blocks, content.slice(lastIndex));
+  return blocks;
+}
+
+function looksLikeCodeSnippet(content: string) {
+  const normalized = content.trim();
+
+  if (!normalized) {
+    return false;
+  }
+
+  const lines = normalized.split('\n');
+  const hasIndentedLine = lines.some((line, index) => index > 0 && /^\s+/.test(line));
+  const hasCodeKeyword =
+    /\b(def|class|from|import|if|elif|else|for|while|try|except|finally|return|yield|print|const|let|var|function|SELECT|INSERT|UPDATE|DELETE)\b/.test(
+      normalized
+    );
+  const hasProgrammingPunctuation = /[{}()[\];:]/.test(normalized);
+  const hasAssignment = /\b[A-Za-z_][\w.]*\s*=\s*[^=]/.test(normalized);
+
+  return hasIndentedLine || (hasCodeKeyword && hasProgrammingPunctuation) || hasAssignment;
+}
+
+function getContentBlocks(content: string) {
+  const normalized = content.replace(/\r\n?/g, '\n').trim();
+
+  if (!normalized) {
+    return [];
+  }
+
+  const fencedBlocks = getFencedCodeBlocks(normalized);
+  if (fencedBlocks.length > 0) {
+    return fencedBlocks;
+  }
+
+  const lines = normalized.split('\n');
+  if (lines.length > 1) {
+    const lead = lines[0].trim();
+    const remainder = lines.slice(1).join('\n').replace(/^\n+|\n+$/g, '');
+
+    if (remainder && looksLikeCodeSnippet(remainder)) {
+      const blocks: ContentBlock[] = [];
+
+      if (lead) {
+        blocks.push({ type: 'text', content: lead });
+      }
+
+      blocks.push({ type: 'code', content: remainder, language: null });
+      return blocks;
+    }
+
+    if (looksLikeCodeSnippet(normalized)) {
+      return [{ type: 'code', content: normalized, language: null }];
+    }
+  }
+
+  const blocks: ContentBlock[] = [];
+  pushTextBlocks(blocks, normalized);
+  return blocks;
+}
+
+function FormattedContent({
+  content,
+  variant = 'body'
+}: {
+  content: string;
+  variant?: 'body' | 'prompt';
+}) {
+  const blocks = getContentBlocks(content);
+
+  return (
+    <>
+      {blocks.map((block, index) =>
+        block.type === 'code' ? (
+          <pre
+            key={`${variant}-code-${index}`}
+            className={`quiz-rich-code ${variant === 'prompt' ? 'quiz-rich-code-prompt' : 'quiz-rich-code-body'}`}
+            data-language={block.language ?? undefined}
+          >
+            <code>{block.content}</code>
+          </pre>
+        ) : (
+          <p
+            key={`${variant}-text-${index}`}
+            className={`quiz-rich-text ${variant === 'prompt' ? 'quiz-rich-text-prompt' : 'quiz-rich-text-body'}`}
+          >
+            {block.content}
+          </p>
+        )
+      )}
+    </>
+  );
 }
 
 export function QuizRunner({
@@ -330,7 +474,12 @@ export function QuizRunner({
                   questionRefs.current[question.id] = node;
                 }}
               >
-                <h3>{index + 1}. {question.prompt}</h3>
+                <div className="quiz-question-head">
+                  <p className="quiz-question-number">Question {index + 1}</p>
+                  <div className="quiz-question-prompt">
+                    <FormattedContent content={question.prompt} variant="prompt" />
+                  </div>
+                </div>
                 {question.type === 'fill_blank' ? (
                   <input
                     className="input"
@@ -368,7 +517,7 @@ export function QuizRunner({
                               })
                             }
                           />
-                          <span>{option}</span>
+                          <span className="option-copy">{option}</span>
                         </label>
                       );
                     })}
@@ -402,7 +551,7 @@ export function QuizRunner({
                           >
                             <div className="ordering-option-copy">
                               <span className="badge">#{orderIndex + 1}</span>
-                              <span>{question.options[optionIndex]}</span>
+                              <span className="option-copy">{question.options[optionIndex]}</span>
                             </div>
                             <div className="ordering-controls">
                               <button
@@ -444,7 +593,7 @@ export function QuizRunner({
                             checked={selected === optionIndex}
                             onChange={() => setAnswers((prev) => ({ ...prev, [question.id]: optionIndex }))}
                           />
-                          <span>{option}</span>
+                          <span className="option-copy">{option}</span>
                         </label>
                       );
                     })}
@@ -457,16 +606,16 @@ export function QuizRunner({
                     </p>
                     {wasAnswered ? (
                       <p className="muted">
-                        <strong>Your answer:</strong> {selectedLabel}
+                        <strong>Your answer:</strong> <span className="quiz-feedback-answer">{selectedLabel}</span>
                       </p>
                     ) : null}
                     <p className="muted">
-                      <strong>Correct answer:</strong> {correctLabel}
+                      <strong>Correct answer:</strong> <span className="quiz-feedback-answer">{correctLabel}</span>
                     </p>
                     {question.explanation ? (
                       <div className="quiz-explanation">
                         <strong>Explanation</strong>
-                        <p className="muted">{question.explanation}</p>
+                        <FormattedContent content={question.explanation} />
                       </div>
                     ) : null}
                   </div>

@@ -34,6 +34,20 @@ const exampleJson = {
       options: ['Train the model', 'Collect data', 'Evaluate the model', 'Clean the data'],
       answerIndexes: [1, 3, 0, 2],
       explanation: 'A common flow is collect data, clean it, train the model, then evaluate it.'
+    },
+    {
+      type: 'multiple_choice',
+      prompt: `What is the output of:
+\`\`\`python
+def f():
+    return 10
+    print('Hi')
+
+print(f())
+\`\`\``,
+      options: ['Hi then 10', '10', 'None', 'Error'],
+      answerIndex: 1,
+      explanation: 'Code after return does not run, and print(f()) is outside the function, so the output is 10.'
     }
   ]
 };
@@ -63,6 +77,7 @@ export default function JsonFormatPage() {
           <li>Use <code>type: "select_all"</code> with <code>options</code> and <code>answerIndexes</code> for checkbox-style questions.</li>
           <li>Use <code>type: "ordering"</code> with <code>options</code> and <code>answerIndexes</code> for sequence questions.</li>
           <li>Use <code>type: "fill_blank"</code> with <code>acceptedAnswers</code> for text-entry questions.</li>
+          <li>For code questions, include real line breaks with <code>\n</code> or fenced code blocks using triple backticks so indentation stays visible.</li>
           <li><code>answerIndex</code> must point to a valid option for multiple-choice questions.</li>
           <li><code>answerIndexes</code> must contain valid, non-duplicate option indexes for select-all questions.</li>
           <li>For ordering questions, <code>answerIndexes</code> must contain every option index exactly once in the correct sequence.</li>

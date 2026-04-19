@@ -154,6 +154,18 @@ Upload one quiz JSON at a time.
       ],
       "answerIndexes": [1, 3, 0, 2],
       "explanation": "A common flow is collect data, clean it, train the model, then evaluate it."
+    },
+    {
+      "type": "multiple_choice",
+      "prompt": "What is the output of:\n```python\ndef f():\n    return 10\n    print('Hi')\n\nprint(f())\n```",
+      "options": [
+        "Hi then 10",
+        "10",
+        "None",
+        "Error"
+      ],
+      "answerIndex": 1,
+      "explanation": "Code after return does not run, and print(f()) is outside the function, so the output is 10."
     }
   ]
 }

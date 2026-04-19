@@ -35,6 +35,18 @@
         "training set"
       ],
       "explanation": "The training set is used to learn the model parameters."
+    },
+    {
+      "type": "multiple_choice",
+      "prompt": "What is the output of:\n```python\ndef f():\n    return 10\n    print('Hi')\n\nprint(f())\n```",
+      "options": [
+        "Hi then 10",
+        "10",
+        "None",
+        "Error"
+      ],
+      "answerIndex": 1,
+      "explanation": "Code after return does not run, and print(f()) is outside the function, so the output is 10."
     }
   ]
 }
